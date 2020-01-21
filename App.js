@@ -11,6 +11,8 @@ import apolloClientOptions from "./apollo";
 import { AppLoading } from "expo";
 import { ThemeProvider } from "styled-components";
 import styles from "./styles";
+import { AuthProvider } from "./AuthContext";
+import NavController from "./components/NavController";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false); // 로딩 상태 확인 state
@@ -61,11 +63,9 @@ export default function App() {
   return loaded && client && isLoggedIn !== null ? (
     <ApolloProvider client={client}>
       <ThemeProvider theme={styles}>
-        {isLoggedIn === true ? (
-          <Text>로그인 했다.</Text>
-        ) : (
-          <Text>로그아웃 했다.</Text>
-        )}
+        <AuthProvider>
+          <NavController />
+        </AuthProvider>
       </ThemeProvider>
     </ApolloProvider>
   ) : (
