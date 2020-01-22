@@ -1,5 +1,5 @@
-import React from "react";
-import { meChecker } from "../AuthContext";
+import React, { useEffect } from "react";
+import { useMeChecker } from "../AuthContext";
 import styled from "styled-components";
 import { Text } from "react-native";
 
@@ -11,11 +11,13 @@ const View = styled.View`
 `;
 
 export default () => {
-  const checker = meChecker();
-  const info = checker();
+  const isMe = useMeChecker();
+  const meData = isMe();
   return (
     <View>
-      <Text>user {info.data.me.username} 로그인됨</Text>
+      <Text>
+        {meData && meData.data ? meData.data.me.username : null} 로그인됨
+      </Text>
     </View>
   );
 };

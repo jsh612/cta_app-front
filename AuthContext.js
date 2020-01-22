@@ -18,6 +18,8 @@ export const AuthProvider = ({ isLoggedIn: isLoggedInProp, children }) => {
   //  props.children은 컴포넌트의 여는 태그와 닫는 태그 사이의 내용을 포함
 
   const [isLoggedIn, setIsLoggedIn] = useState(isLoggedInProp);
+  const [isMe, setIsMe] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const logUserIn = async token => {
     try {
@@ -42,8 +44,15 @@ export const AuthProvider = ({ isLoggedIn: isLoggedInProp, children }) => {
 
   const meChecker = () => {
     try {
-      const { data, loading, refetch } = useQuery(ME);
-      return { data, loading, refetch };
+      if (isMe === "") {
+        setIsLoading(true);
+        const { data, loading, refetch } = useQuery(ME);
+        if (!loading) {
+          setIsLoading(loading);
+          setIsMe({ data, loading, refetch });
+        }
+      }
+      return isMe;
     } catch (error) {
       console.log(error);
     }
@@ -78,7 +87,7 @@ export const useLogOut = () => {
   return logUserOut;
 };
 
-export const meChecker = () => {
+export const useMeChecker = () => {
   const { meChecker } = useContext(AuthContext);
   return meChecker;
 };

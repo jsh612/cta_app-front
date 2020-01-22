@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/react-hooks";
 
 import AuthButton from "../../components/AuthButton";
 import { LOGIN } from "../../queries/AuthQueries";
-import { useLogIn } from "../../AuthContext";
+import { useLogIn, meChecker, useMeChecker } from "../../AuthContext";
 
 const View = styled.KeyboardAvoidingView`
   flex: 1;
@@ -23,7 +23,7 @@ const LogoImg = styled.Image`
 `;
 
 export default ({ navigation }) => {
-  const idInput = useInput("");
+  const idInput = useInput(navigation.getParam("username", ""));
   const pwInput = useInput("");
 
   const logIn = useLogIn();
