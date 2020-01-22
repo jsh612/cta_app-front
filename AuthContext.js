@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { AsyncStorage } from "react-native";
+import { useQuery } from "@apollo/react-hooks";
+import { ME } from "./queries/AuthQueries";
 
 //context는 object인데 useContext를 통해서 어디서든 접근 가능
 export const AuthContext = createContext();
@@ -38,8 +40,19 @@ export const AuthProvider = ({ isLoggedIn: isLoggedInProp, children }) => {
     }
   };
 
+  const meChecker = () => {
+    try {
+      const { data, loading, refetch } = useQuery(ME);
+      return { data, loading, refetch };
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, logUserIn, logUserOut }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, logUserIn, logUserOut, meChecker }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -63,4 +76,9 @@ export const useLogIn = () => {
 export const useLogOut = () => {
   const { logUserOut } = useContext(AuthContext);
   return logUserOut;
+};
+
+export const meChecker = () => {
+  const { meChecker } = useContext(AuthContext);
+  return meChecker;
 };
