@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
+// TouchableWithoutFeedback를 아래와 같이 가져올 경우 작동 안할 수 있음
+// import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { useMutation } from "@apollo/react-hooks";
+
 import Picker from "../../components/Picker";
 import constants from "../../constants";
 import useInput from "../../hooks/useInput";
 import ScoreInput from "../../components/ScoreInput";
-import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import ScroeButton from "../../components/ScoreButton";
 import styles from "../../styles";
-// TouchableWithoutFeedback를 아래와 같이 가져올 경우 작동 안할 수 있음
-// import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { CREATE_ACC, CREATE_TAX_ACC } from "../../queries/ScoreQueries";
 
 const Container = styled.KeyboardAvoidingView`
   flex: 1;
@@ -35,9 +38,51 @@ const Title = styled.Text`
 export default ({ navigation }) => {
   const [round, setRound] = useState("");
   const [episode, setEpisode] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const accInput = useInput("");
   const taxAccInput = useInput("");
+
+  const [accMutation] = useMutation(CREATE_ACC, {
+    variables: {
+      score: Number(accInput.value),
+      round: `${round}-${episode}`,
+      academy: "나무"
+    }
+  });
+
+  const [taxAccMutation] = useMutation(CREATE_TAX_ACC, {
+    variables: {
+      score: Number(taxAccInput.value),
+      round: `${round}-${episode}`,
+      academy: "나무"
+    }
+  });
+
+  const submitHandler = async () => {
+    try {
+      setLoading(true);
+      if (round === "" || episode === "") {
+        return Alert.alert("순환과 회차를 모두 선택해주세요");
+      }
+      if (accInput.value !== "") {
+        await accMutation();
+        accInput.setValue("");
+      }
+      if (taxAccInput.value !== "") {
+        await taxAccMutation();
+        taxAccInput.setValue("");
+      }
+      if (accInput.value === "" && taxAccInput.value === "") {
+        return Alert.alert("한 과목 이상의 성적을 입력 해주세요.");
+      }
+      return Alert.alert("성적이 제출되었습니다.");
+    } catch (error) {
+      console.log("성적입력 error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const roundArr = [
     { label: "동차GS", value: "1" },
@@ -87,7 +132,7 @@ export default ({ navigation }) => {
           <Title>회1 점수</Title>
           <ScoreInput
             {...accInput}
-            placeholder="회1 점수(숫자만 입력)"
+            placeholder="회1 점수"
             keyboardType="numeric"
           />
         </ContentWrapper>
@@ -95,11 +140,15 @@ export default ({ navigation }) => {
           <Title>회2 점수</Title>
           <ScoreInput
             {...taxAccInput}
-            placeholder="회2 점수(숫자만 입력)"
+            placeholder="회2 점수"
             keyboardType="numeric"
           />
         </ContentWrapper>
-        <ScroeButton text="성적 제출" />
+        <ScroeButton
+          text="성적 제출"
+          onPress={submitHandler}
+          loading={loading}
+        />
         <ScroeButton text="순위 확인" />
       </Container>
     </TouchableWithoutFeedback>
