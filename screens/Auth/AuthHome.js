@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/react-hooks";
 
 import AuthButton from "../../components/AuthButton";
 import { LOGIN } from "../../queries/AuthQueries";
-import { useLogIn, meChecker, useMeChecker } from "../../AuthContext";
+import { useLogIn } from "../../AuthContext";
 
 const View = styled.KeyboardAvoidingView`
   flex: 1;

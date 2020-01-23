@@ -66,7 +66,6 @@ export const AuthProvider = ({ isLoggedIn: isLoggedInProp, children }) => {
     </AuthContext.Provider>
   );
 };
-
 /* 
 
    useContext를 이용한 함수들 -> 해당 함수를 이용하여 다른 컴포넌트에서 context 접근가능
