@@ -38,6 +38,7 @@ const Title = styled.Text`
 export default ({ navigation }) => {
   const [round, setRound] = useState("");
   const [episode, setEpisode] = useState("");
+  const [academy, setAcademy] = useState("");
   const [loading, setLoading] = useState(false);
 
   const accInput = useInput("");
@@ -47,7 +48,7 @@ export default ({ navigation }) => {
     variables: {
       score: Number(accInput.value),
       round: `${round}-${episode}`,
-      academy: "나무"
+      academy
     }
   });
 
@@ -55,7 +56,7 @@ export default ({ navigation }) => {
     variables: {
       score: Number(taxAccInput.value),
       round: `${round}-${episode}`,
-      academy: "나무"
+      academy
     }
   });
 
@@ -67,15 +68,17 @@ export default ({ navigation }) => {
       }
       if (accInput.value !== "") {
         await accMutation();
-        accInput.setValue("");
       }
       if (taxAccInput.value !== "") {
         await taxAccMutation();
-        taxAccInput.setValue("");
       }
       if (accInput.value === "" && taxAccInput.value === "") {
         return Alert.alert("한 과목 이상의 성적을 입력 해주세요.");
       }
+      accInput.setValue("");
+      taxAccInput.setValue("");
+      setRound("");
+      setEpisode("");
       return Alert.alert("성적이 제출되었습니다.");
     } catch (error) {
       console.log("성적입력 error:", error);
@@ -84,6 +87,7 @@ export default ({ navigation }) => {
     }
   };
 
+  const goRank = () => navigation.navigate("Rank", { name: "나무" });
   const roundArr = [
     { label: "동차GS", value: "1" },
     { label: "2순환", value: "2" },
@@ -105,6 +109,11 @@ export default ({ navigation }) => {
     { label: "12회", value: "12" }
   ];
 
+  const academyArr = [
+    { label: "우리", value: "우리" },
+    { label: "나무", value: "나무" },
+    { label: "위너스", value: "위너스" }
+  ];
   const pickerHandler = stateSet => {
     return value => stateSet(value);
   };
@@ -113,10 +122,20 @@ export default ({ navigation }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container behavior="padding" enabled>
         <ContentWrapper>
+          <Title>어느 학원?</Title>
+          <Picker
+            placeholder="학원 선택"
+            items={academyArr}
+            value={academy}
+            onValueChange={pickerHandler(setAcademy)}
+          />
+        </ContentWrapper>
+        <ContentWrapper>
           <Title>몇 순환?</Title>
           <Picker
             placeholder="순환 선택"
             items={roundArr}
+            value={round}
             onValueChange={pickerHandler(setRound)}
           />
         </ContentWrapper>
@@ -125,6 +144,7 @@ export default ({ navigation }) => {
           <Picker
             placeholder="회차 선택"
             items={episodeArr}
+            value={episode}
             onValueChange={pickerHandler(setEpisode)}
           />
         </ContentWrapper>
@@ -149,7 +169,7 @@ export default ({ navigation }) => {
           onPress={submitHandler}
           loading={loading}
         />
-        <ScroeButton text="순위 확인" />
+        <ScroeButton text="순위 확인" onPress={goRank} />
       </Container>
     </TouchableWithoutFeedback>
   );

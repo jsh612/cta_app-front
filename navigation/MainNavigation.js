@@ -3,8 +3,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 
-import Namu from "../screens/Main/Namu";
-import InputScore from "../screens/Main/InputScore";
+import Main from "../screens/Main/Main";
 import Rank from "../screens/Main/Rank";
 import Home from "../screens/Main/Home";
 import NavIcon from "../components/NavIcon";
@@ -21,12 +20,6 @@ const stackFactory = (initRoute, customConifg) =>
           ...customConifg
         }
       },
-      InputScore: {
-        screen: InputScore,
-        navigationOptions: {
-          title: "성적입력"
-        }
-      },
       Rank: {
         screen: Rank,
         navigationOptions: {
@@ -36,21 +29,28 @@ const stackFactory = (initRoute, customConifg) =>
     },
     {
       defaultNavigationOptions: {
-        headerBackTitle: null
+        headerBackTitleVisible: false,
+        headerTintColor: styles.blackColor,
+        headerStyle: {
+          backgroundColor: "green"
+        },
+        headerTitleStyle: {
+          fontSize: 25
+        }
       }
     }
   );
 
 const mainTab = createBottomTabNavigator(
   {
-    Namu: {
-      screen: stackFactory(Namu, {
+    Main: {
+      screen: stackFactory(Main, {
         headerBackTitle: null,
-        title: "나무"
+        title: "Main"
       }),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
-          <NavLabel size={26} focused={focused} title="나무" />
+          <NavLabel size={26} focused={focused} title="Main" />
         )
       }
     },
@@ -81,7 +81,10 @@ const mainTab = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      showLabel: false
+      showLabel: false,
+      style: {
+        backgroundColor: "green"
+      }
     }
   }
 );

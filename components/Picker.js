@@ -7,21 +7,28 @@ import { Ionicons } from "@expo/vector-icons";
 
 const Wrapper = styled.View`
   align-items: center;
-  width: 200px;
-  height: 40px;
+  width: ${props => props.size[0]};
+  height: ${props => props.size[1]};
 `;
 
 const Icon = styled(Ionicons)`
   margin: 6px;
 `;
 
-const Picker = ({ placeholder, onValueChange, items }) => (
-  <Wrapper>
+const Picker = ({
+  size = ["200px", "40px"],
+  placeholder,
+  onValueChange,
+  items,
+  value
+}) => (
+  <Wrapper size={size}>
     <RNPickerSelect
       style={{ ...pickerSelectStyles, width: 100 }}
       placeholder={{ label: placeholder }}
       onValueChange={onValueChange}
       items={items}
+      value={value}
       Icon={() => {
         return (
           <Icon
@@ -45,6 +52,7 @@ const pickerSelectStyles = StyleSheet.create({
     borderRadius: 4,
     color: "black",
     padding: 5,
+    paddingLeft: 10,
     display: "flex"
   },
   inputAndroid: {
@@ -55,6 +63,7 @@ const pickerSelectStyles = StyleSheet.create({
     borderRadius: 4,
     color: "black",
     padding: 5,
+    paddingLeft: 10,
     display: "flex"
   }
 });
@@ -62,7 +71,8 @@ const pickerSelectStyles = StyleSheet.create({
 Picker.proptypes = {
   placeholder: PropTyes.string.isRequired,
   onValueChange: PropTyes.func.isRequired,
-  items: PropTyes.array.isRequired
+  items: PropTyes.array.isRequired,
+  size: PropTyes.arrayOf(PropTyes.string)
 };
 
 export default Picker;
