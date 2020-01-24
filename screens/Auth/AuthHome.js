@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import constants from "../../constants";
 import AuthInput from "../../components/AuthInput";

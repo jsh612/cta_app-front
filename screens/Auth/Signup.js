@@ -40,8 +40,8 @@ export default ({ navigation }) => {
         data: { createAccount: newUser }
       } = await createAccountMutation();
       if (newUser) {
-        Alert.alert("가입이 완료", "로그인 화면으로 이동합니다.");
         navigation.navigate("AuthHome", { username });
+        Alert.alert("가입이 완료", "로그인 화면으로 이동");
       }
     } catch (error) {
       Alert.alert("해당 아이디는 이미 존재합니다.");

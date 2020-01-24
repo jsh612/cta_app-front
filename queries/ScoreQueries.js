@@ -15,3 +15,28 @@ export const CREATE_TAX_ACC = gql`
     }
   }
 `;
+
+export const SEE_ROUND = gql`
+  query seeRound($round: String!, $academy: String!) {
+    seeRound(round: $round, academy: $academy) {
+      accs {
+        score
+        user {
+          username
+        }
+      }
+      taxAccs {
+        score
+        user {
+          username
+        }
+      }
+      totalAccs {
+        score
+        user {
+          username
+        }
+      }
+    }
+  }
+`;

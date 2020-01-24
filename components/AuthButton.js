@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import constants from "../constants";
 import { ActivityIndicator } from "react-native";
+import styles from "../styles";
 
 const Touchable = styled.TouchableOpacity`
   margin-top: 10px;
@@ -20,10 +21,16 @@ const Container = styled.View`
 const Text = styled.Text`
   color: white;
   text-align: center;
-  font-weight: 600;
+  font-weight: 900;
+  font-size: 16px;
 `;
 
-const AuthButton = ({ text, onPress, loading = false, bgColor = null }) => (
+const AuthButton = ({
+  text,
+  onPress,
+  loading = false,
+  bgColor = styles.blackColor
+}) => (
   //# disabled
   //  - 로딩중일 경우 컴포넌트와의 상호작용 기능을 끊기 위해
   //  - https://facebook.github.io/react-native/docs/touchablewithoutfeedback#disabled
