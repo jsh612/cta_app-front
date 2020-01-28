@@ -57,8 +57,8 @@ export const makeRankList = data => {
         accsRankArr.push("-");
       }
       if (taxAccs[i]) {
-        taxAccsScoreArr.push(accs[i].score);
-        taxAccsRankArr.push(accs[i].rank);
+        taxAccsScoreArr.push(taxAccs[i].score);
+        taxAccsRankArr.push(taxAccs[i].rank);
       } else {
         taxAccsScoreArr.push("-");
         taxAccsRankArr.push("-");
@@ -82,6 +82,21 @@ export const makeRankList = data => {
   };
 };
 
+//배열을 오름차순 또는 내림차순으로 정렬
 export const sortFunc = (arr, bigger = true) => {
   return bigger ? arr.sort((a, b) => a - b) : arr.sort((a, b) => b - a);
+};
+
+//각 성적의 평균 계산 함수
+export const average = arr => {
+  let sum = 0;
+  let leng = arr.length;
+  arr.forEach(v => {
+    if (typeof v === "number") {
+      sum = sum + v;
+    } else {
+      leng = leng - 1;
+    }
+  });
+  return sum / leng;
 };

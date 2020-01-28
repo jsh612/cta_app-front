@@ -11,8 +11,8 @@ import constants from "../../constants";
 import ScroeButton from "../../components/ScoreButton";
 import styles from "../../styles";
 import { SEE_ROUND } from "../../queries/ScoreQueries";
-import { basicInfo, makeRankList, sortFunc, seeMe } from "../../utils";
-import { useMeChecker } from "../../AuthContext";
+import { basicInfo, makeRankList, sortFunc, average } from "../../utils";
+import MyRank from "../../components/MyRank";
 
 const Container = styled.View`
   align-items: center;
@@ -56,13 +56,13 @@ const Title = styled.Text`
   color: ${styles.blackColor};
 `;
 
-export default ({ navigation }) => {
+export default () => {
   const [round, setRound] = useState("");
   const [episode, setEpisode] = useState(null);
   const [academy, setAcademy] = useState(null);
-  const [fetchloading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [skipBool, setSkipBool] = useState(true);
+  const [meData, setMedata] = useState({});
 
   const { data, loding, refetch } = useQuery(SEE_ROUND, {
     variables: {
@@ -100,6 +100,14 @@ export default ({ navigation }) => {
           sortFunc(taxAccsScoreArr, false),
           sortFunc(totalRankArr),
           sortFunc(totalScoreArr, false)
+        ],
+        averageData: [
+          "평균",
+          average(accsScoreArr),
+          "평균",
+          average(taxAccsScoreArr),
+          "평균",
+          average(totalScoreArr)
         ]
       }
     : null;
@@ -107,12 +115,12 @@ export default ({ navigation }) => {
   const rankWatcher = () => {
     // skipBool 조정을 통해 useQuery skip 여부 통제
     try {
-      setLoading(true);
       setSkipBool(false);
+      if (data) {
+        refetch();
+      }
     } catch (error) {
       console.log("순위가져오기 오류::", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -129,7 +137,12 @@ export default ({ navigation }) => {
     }
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (data) {
+      refetch();
+    }
+  }, [data]);
+
   return (
     <Container>
       <Header>
@@ -170,7 +183,7 @@ export default ({ navigation }) => {
         {!skipBool ? (
           <TableWrapper>
             <Table
-              borderStyle={{ borderWidth: 2, borderColor: "#c8e1ff" }}
+              borderStyle={{ borderWidth: 2, borderColor: styles.blackColor }}
               textStyle={{ fontAlign: "center" }}
             >
               <Row
@@ -183,11 +196,20 @@ export default ({ navigation }) => {
                 style={tablestyles.head}
                 textStyle={tablestyles.text}
               />
-              <Cols
-                heightArr={[50, 50, 50, 50]}
-                data={tableInfo.tableData}
+              <Row
+                data={tableInfo.averageData}
+                style={tablestyles.head}
                 textStyle={tablestyles.text}
               />
+              <MyRank
+                borderStyle={{ borderWidth: 2, borderColor: styles.blackColor }}
+                academy={academy}
+                round={round}
+                episode={episode}
+                style={tablestyles.head}
+                textStyle={tablestyles.text}
+              />
+              <Cols data={tableInfo.tableData} textStyle={tablestyles.text} />
             </Table>
           </TableWrapper>
         ) : null}
@@ -198,5 +220,5 @@ export default ({ navigation }) => {
 
 const tablestyles = StyleSheet.create({
   head: { height: 40, backgroundColor: styles.lightGreyColor },
-  text: { margin: 6, textAlign: "center", fontSize: 20 }
+  text: { margin: 6, textAlign: "center", fontSize: 18 }
 });
