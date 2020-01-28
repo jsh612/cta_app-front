@@ -98,5 +98,5 @@ export const average = arr => {
       leng = leng - 1;
     }
   });
-  return sum / leng;
+  return (sum / leng).toFixed(1);
 };

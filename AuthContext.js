@@ -42,9 +42,9 @@ export const AuthProvider = ({ isLoggedIn: isLoggedInProp, children }) => {
     }
   };
 
-  const meChecker = () => {
+  const meChecker = fetchBool => {
     try {
-      if (isMe === "") {
+      if (isMe === "" && fetchBool) {
         setIsLoading(true);
         const { data, loading, refetch } = useQuery(ME);
         if (!loading) {
@@ -52,7 +52,7 @@ export const AuthProvider = ({ isLoggedIn: isLoggedInProp, children }) => {
           setIsMe({ data, loading, refetch });
         }
       }
-      return isMe;
+      return { isMe, setIsMe };
     } catch (error) {
       console.log("Auth meChecker 오류::", error);
     }
