@@ -5,11 +5,11 @@ import { createAppContainer } from "react-navigation";
 
 import Main from "../screens/Main/Main";
 import Rank from "../screens/Main/Rank";
-import Home from "../screens/Main/Home";
+import Home from "../screens/Home";
 import NavIcon from "../components/NavIcon";
-import NavLabel from "../components/NavLabel";
 import styles from "../styles";
 import { Platform } from "react-native";
+import Profile from "../screens/Profile";
 
 const stackFactory = (initRoute, customConifg) =>
   createStackNavigator(
@@ -43,41 +43,48 @@ const stackFactory = (initRoute, customConifg) =>
 
 const mainTab = createBottomTabNavigator(
   {
-    Main: {
-      screen: stackFactory(Main, {
-        headerBackTitle: null,
-        title: "Main"
-      }),
-      navigationOptions: {
-        tabBarIcon: ({ focused }) => (
-          <NavLabel size={26} focused={focused} title="Main" />
-        )
-      }
-    },
     Home: {
       screen: Home,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <NavIcon
-            size={26}
+            size={40}
             name={Platform.OS === "ios" ? "ios-home" : "md-home"}
             focused={focused}
-            color={styles.redColor}
+            color={styles.blackColor}
+          />
+        )
+      }
+    },
+    Main: {
+      screen: stackFactory(Main, {
+        headerBackTitle: null,
+        title: "성적 공유"
+      }),
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <NavIcon
+            size={40}
+            name={Platform.OS === "ios" ? "ios-create" : "md-create"}
+            focused={focused}
+            color={styles.blackColor}
+          />
+        )
+      }
+    },
+    Profile: {
+      screen: Profile,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <NavIcon
+            size={40}
+            name={Platform.OS === "ios" ? "ios-person" : "md-person"}
+            focused={focused}
+            color={styles.blackColor}
           />
         )
       }
     }
-    // Namu: {
-    //   screen: stackFactory(Namu, {
-    //     headerBackTitle: null,
-    //     title: "나무"
-    //   }),
-    //   navigationOptions: {
-    //     tabBarIcon: ({ focused }) => (
-    //       <NavLabel size={26} focused={focused} title="나무" />
-    //     )
-    //   }
-    // }
   },
   {
     tabBarOptions: {

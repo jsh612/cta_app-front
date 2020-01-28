@@ -13,6 +13,7 @@ const NavIcon = ({
     name={name}
     color={focused ? color : styles.darkGreyColor}
     size={size}
+    style={{ paddingTop: 10 }}
   />
 );
 

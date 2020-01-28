@@ -4,8 +4,10 @@ import PropTyes from "prop-types";
 import styles from "../styles";
 
 const Text = styled.Text`
+  font-weight: 900;
   font-size: ${props => props.size};
   color: ${props => (props.focused ? props.color : styles.darkGreyColor)};
+  padding-top: 10px;
 `;
 
 const NavLabel = ({ focused, title, size, color = styles.redColor }) => (
