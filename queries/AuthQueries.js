@@ -11,20 +11,25 @@ export const ME = gql`
     me {
       username
       accs {
+        round
+        episode
         score
         academy
+        rank
       }
       taxAccs {
+        round
+        episode
         score
         academy
+        rank
       }
-      taxLaw1s {
+      totalAccs {
+        round
+        episode
         score
         academy
-      }
-      taxLaw2s {
-        score
-        academy
+        rank
       }
     }
   }

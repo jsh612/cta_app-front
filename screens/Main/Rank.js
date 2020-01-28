@@ -11,7 +11,8 @@ import constants from "../../constants";
 import ScroeButton from "../../components/ScoreButton";
 import styles from "../../styles";
 import { SEE_ROUND } from "../../queries/ScoreQueries";
-import { makeScoreArr, makeRankArr } from "../../utils";
+import { basicInfo, makeRankList, sortFunc, seeMe } from "../../utils";
+import { useMeChecker } from "../../AuthContext";
 
 const Container = styled.View`
   align-items: center;
@@ -61,66 +62,47 @@ export default ({ navigation }) => {
   const [academy, setAcademy] = useState(null);
   const [fetchloading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [accsRank, setAccsRank] = useState(null);
-  const [taxAccsRank, setTaxAccsRank] = useState(null);
-  const [totalAccsRank, setTotalAccsRank] = useState(null);
   const [skipBool, setSkipBool] = useState(true);
 
   const { data, loding, refetch } = useQuery(SEE_ROUND, {
     variables: {
-      round: `${round}-${episode}`,
+      round,
+      episode,
       academy
     },
     //skip 속성을 통해 순위버튼 클릭시 쿼리 작동되도록 함.
     skip: !round || !episode || skipBool
   });
 
-  const roundArr = [
-    { label: "동차GS", value: "1" },
-    { label: "2순환", value: "2" },
-    { label: "3순환", value: "3" }
-  ];
+  const {
+    accsScoreArr,
+    accsRankArr,
+    taxAccsScoreArr,
+    taxAccsRankArr,
+    totalScoreArr,
+    totalRankArr
+  } = makeRankList(data);
 
-  const episodeArr = [
-    { label: "1회", value: "1" },
-    { label: "2회", value: "2" },
-    { label: "3회", value: "3" },
-    { label: "4회", value: "4" },
-    { label: "5회", value: "5" },
-    { label: "6회", value: "6" },
-    { label: "7회", value: "7" },
-    { label: "8회", value: "8" },
-    { label: "9회", value: "9" },
-    { label: "10회", value: "10" },
-    { label: "11회", value: "11" },
-    { label: "12회", value: "12" }
-  ];
-
-  const academyArr = [
-    { label: "우리", value: "우리" },
-    { label: "나무", value: "나무" },
-    { label: "위너스", value: "위너스" }
-  ];
+  const { roundArr, episodeArr, academyArr } = basicInfo();
 
   const pickerHandler = stateSet => {
     return value => stateSet(value);
   };
 
-  const tableInfo =
-    !skipBool && (accsRank || taxAccsRank || totalAccsRank)
-      ? {
-          tableHead: ["회1", "회2", "회1 + 회2"],
-          tableSubHead: ["순위", "점수", "순위", "점수", "순위", "점수"],
-          tableData: [
-            accsRank.rankArr,
-            accsRank.scoreArr,
-            taxAccsRank.rankArr,
-            taxAccsRank.scoreArr,
-            totalAccsRank.rankArr,
-            totalAccsRank.scoreArr
-          ]
-        }
-      : null;
+  const tableInfo = !skipBool
+    ? {
+        tableHead: ["회1", "회2", "회1 + 회2"],
+        tableSubHead: ["순위", "점수", "순위", "점수", "순위", "점수"],
+        tableData: [
+          sortFunc(accsRankArr),
+          sortFunc(accsScoreArr, false),
+          sortFunc(taxAccsRankArr),
+          sortFunc(taxAccsScoreArr, false),
+          sortFunc(totalRankArr),
+          sortFunc(totalScoreArr, false)
+        ]
+      }
+    : null;
 
   const rankWatcher = () => {
     // skipBool 조정을 통해 useQuery skip 여부 통제
@@ -147,21 +129,7 @@ export default ({ navigation }) => {
     }
   };
 
-  const rankHandler = subject => {
-    if (data && data.seeRound && data.seeRound[subject]) {
-      const originData = data.seeRound[subject];
-      const scoreArr = makeScoreArr(originData);
-      const rankArr = makeRankArr(scoreArr);
-      return { scoreArr, rankArr };
-    }
-    return;
-  };
-
-  useEffect(() => {
-    setAccsRank(rankHandler("accs"));
-    setTaxAccsRank(rankHandler("taxAccs"));
-    setTotalAccsRank(rankHandler("totalAccs"));
-  }, [data]);
+  useEffect(() => {});
   return (
     <Container>
       <Header>
@@ -199,7 +167,7 @@ export default ({ navigation }) => {
           <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
         }
       >
-        {!skipBool && (accsRank || taxAccsRank || totalAccsRank) ? (
+        {!skipBool ? (
           <TableWrapper>
             <Table
               borderStyle={{ borderWidth: 2, borderColor: "#c8e1ff" }}

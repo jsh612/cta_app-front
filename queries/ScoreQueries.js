@@ -37,25 +37,28 @@ export const CREATE_TAX_ACC = gql`
 `;
 
 export const SEE_ROUND = gql`
-  query seeRound($round: String!, $academy: String!) {
-    seeRound(round: $round, academy: $academy) {
+  query seeRound($round: Int!, $episode: Int!, $academy: String!) {
+    seeRound(round: $round, episode: $episode, academy: $academy) {
       accs {
         score
         user {
           username
         }
+        rank
       }
       taxAccs {
         score
         user {
           username
         }
+        rank
       }
       totalAccs {
         score
         user {
           username
         }
+        rank
       }
     }
   }

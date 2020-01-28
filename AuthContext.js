@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState } from "react";
 import { AsyncStorage } from "react-native";
 import { useQuery } from "@apollo/react-hooks";
 import { ME } from "./queries/AuthQueries";
-import { AuthSession } from "expo";
 
 //context는 object인데 useContext를 통해서 어디서든 접근 가능
 export const AuthContext = createContext();
@@ -55,7 +54,7 @@ export const AuthProvider = ({ isLoggedIn: isLoggedInProp, children }) => {
       }
       return isMe;
     } catch (error) {
-      console.log(error);
+      console.log("Auth meChecker 오류::", error);
     }
   };
 

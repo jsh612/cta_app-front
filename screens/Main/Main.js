@@ -12,6 +12,8 @@ import ScoreInput from "../../components/ScoreInput";
 import ScroeButton from "../../components/ScoreButton";
 import styles from "../../styles";
 import { CREATE_ACC, CREATE_TAX_ACC } from "../../queries/ScoreQueries";
+import { basicInfo } from "../../utils";
+import { useMeChecker } from "../../AuthContext";
 
 const Container = styled.KeyboardAvoidingView`
   flex: 1;
@@ -91,32 +93,9 @@ export default ({ navigation }) => {
   };
 
   const goRank = () => navigation.navigate("Rank");
-  const roundArr = [
-    { label: "동차GS", value: 1 },
-    { label: "2순환", value: 2 },
-    { label: "3순환", value: 3 }
-  ];
 
-  const episodeArr = [
-    { label: "1회", value: 1 },
-    { label: "2회", value: 2 },
-    { label: "3회", value: 3 },
-    { label: "4회", value: 4 },
-    { label: "5회", value: 5 },
-    { label: "6회", value: 6 },
-    { label: "7회", value: 7 },
-    { label: "8회", value: 8 },
-    { label: "9회", value: 9 },
-    { label: "10회", value: 10 },
-    { label: "11회", value: 11 },
-    { label: "12회", value: 12 }
-  ];
+  const { roundArr, episodeArr, academyArr } = basicInfo();
 
-  const academyArr = [
-    { label: "우리", value: "우리" },
-    { label: "나무", value: "나무" },
-    { label: "위너스", value: "위너스" }
-  ];
   const pickerHandler = stateSet => {
     return value => stateSet(value);
   };
