@@ -39,7 +39,7 @@ const HeaderColumn = styled.View`
 const ScrollView = styled.ScrollView`
   width: ${constants.width};
   margin-top: 200px;
-  background-color: red;
+  background-color: green;
 `;
 
 const TableWrapper = styled.View`
@@ -62,7 +62,6 @@ export default () => {
   const [academy, setAcademy] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
   const [skipBool, setSkipBool] = useState(true);
-  const [meData, setMedata] = useState({});
 
   const { data, loding, refetch } = useQuery(SEE_ROUND, {
     variables: {

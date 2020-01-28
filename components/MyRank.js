@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { Row } from "react-native-table-component";
 import { useQuery } from "@apollo/react-hooks";
 import { ME } from "../queries/AuthQueries";
