@@ -13,7 +13,6 @@ import ScroeButton from "../../components/ScoreButton";
 import styles from "../../styles";
 import { CREATE_ACC, CREATE_TAX_ACC } from "../../queries/ScoreQueries";
 import { basicInfo } from "../../utils";
-import { useMeChecker } from "../../AuthContext";
 
 const Container = styled.KeyboardAvoidingView`
   flex: 1;

@@ -1,8 +1,3 @@
-import { createStackNavigator } from "react-navigation-stack";
-import Rank from "./screens/Main/Rank";
-import styles from "./styles";
-import HomeDetail from "./screens/Home/HomeDetail";
-
 // 입력 기본정보 출력 (순환, 회차, 학원)
 export const basicInfo = () => {
   const roundArr = [
@@ -103,64 +98,3 @@ export const average = arr => {
   });
   return (sum / leng).toFixed(1);
 };
-
-//메인 화면 스택 생성 함수
-export const mainStackFactory = (initRoute, customConifg) =>
-  createStackNavigator(
-    {
-      InitRoute: {
-        screen: initRoute,
-        navigationOptions: {
-          ...customConifg
-        }
-      },
-      Rank: {
-        screen: Rank,
-        navigationOptions: {
-          title: "순위"
-        }
-      }
-    },
-    {
-      defaultNavigationOptions: {
-        headerBackTitleVisible: false,
-        headerTintColor: styles.blackColor,
-        headerStyle: {
-          backgroundColor: "green"
-        },
-        headerTitleStyle: {
-          fontSize: 25
-        }
-      }
-    }
-  );
-
-//홈 화면 스택 생성 함수
-export const homeStackFactory = (initRoute, customConifg) =>
-  createStackNavigator(
-    {
-      InitRoute: {
-        screen: initRoute,
-        navigationOptions: {
-          ...customConifg
-        }
-      },
-      HomeDetail: {
-        screen: HomeDetail,
-        navigationOptions: {
-          title: "자세히"
-        }
-      }
-    },
-    {
-      defaultNavigationOptions: {
-        headerTintColor: styles.blackColor,
-        headerStyle: {
-          backgroundColor: "green"
-        },
-        headerTitleStyle: {
-          fontSize: 25
-        }
-      }
-    }
-  );

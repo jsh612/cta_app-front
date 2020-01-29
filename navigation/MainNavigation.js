@@ -7,15 +7,12 @@ import NavIcon from "../components/NavIcon";
 import styles from "../styles";
 import { Platform } from "react-native";
 import Profile from "../screens/Profile";
-import { mainStackFactory, homeStackFactory } from "../utils";
+import { mainStackFactory } from "./stackMaker";
 
 const mainTab = createBottomTabNavigator(
   {
     Home: {
-      screen: homeStackFactory(Home, {
-        headerBackTitle: null,
-        title: "공지"
-      }),
+      screen: Home,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <NavIcon
@@ -30,7 +27,8 @@ const mainTab = createBottomTabNavigator(
     Main: {
       screen: mainStackFactory(Main, {
         headerBackTitle: null,
-        title: "성적 공유"
+        title: "성적 공유",
+        headerShown: false
       }),
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
