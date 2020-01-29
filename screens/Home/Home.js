@@ -54,7 +54,7 @@ const NoticeList = styled.View`
 export default () => {
   const { data, loading, refetch } = useQuery(SEE_NOTICE, {
     variables: {
-      name: "2020"
+      name: `${new Date().getFullYear()}`
     }
   });
 
