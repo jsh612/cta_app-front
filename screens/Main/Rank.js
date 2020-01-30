@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { StyleSheet, RefreshControl, Alert } from "react-native";
+import { StyleSheet, RefreshControl, Alert, Platform } from "react-native";
 // TouchableWithoutFeedback를 아래와 같이 가져올 경우 작동 안할 수 있음
 // import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
@@ -13,9 +13,19 @@ import styles from "../../styles";
 import { SEE_ROUND } from "../../queries/ScoreQueries";
 import { basicInfo, makeRankList, sortFunc, average } from "../../utils";
 import MyRank from "../../components/MyRank";
+import NavIcon from "../../components/NavIcon";
 
 const Container = styled.View`
   align-items: center;
+  margin-top: 100px;
+  position: relative;
+`;
+
+const BackBtn = styled.TouchableOpacity`
+  align-self: flex-start;
+  position: absolute;
+  top: -50px;
+  margin-left: 10px;
 `;
 
 const Header = styled.View`
@@ -56,7 +66,7 @@ const Title = styled.Text`
   color: ${styles.blackColor};
 `;
 
-export default () => {
+export default ({ navigation }) => {
   const [round, setRound] = useState("");
   const [episode, setEpisode] = useState("");
   const [academy, setAcademy] = useState("");
@@ -173,6 +183,12 @@ export default () => {
 
   return (
     <Container>
+      <BackBtn onPress={() => navigation.goBack()}>
+        <NavIcon
+          size={40}
+          name={Platform.OS === "ios" ? "ios-arrow-back" : "md--arrow-back"}
+        />
+      </BackBtn>
       <Header>
         <HeaderColumn>
           <Title>연도</Title>

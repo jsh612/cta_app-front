@@ -23,6 +23,7 @@ export const mainStackFactory = (initRoute, customConifg) =>
       defaultNavigationOptions: {
         headerBackTitleVisible: false,
         headerTintColor: styles.blackColor,
+        headerShown: false,
         headerStyle: {
           backgroundColor: "green"
         },
