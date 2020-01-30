@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Text } from "react-native";
+import { Text, RefreshControl } from "react-native";
 import constants from "../../constants";
 import Notice from "../../components/Notice";
 import { useQuery } from "@apollo/react-hooks";
@@ -52,6 +52,8 @@ const NoticeList = styled.View`
 `;
 
 export default () => {
+  const [refreshing, setRefreshing] = useState(false);
+
   const { data, loading, refetch } = useQuery(SEE_NOTICE, {
     variables: {
       name: `${new Date().getFullYear()}`
@@ -61,7 +63,18 @@ export default () => {
   const {
     seeNotice: { ctaNotice, eduNotice }
   } = data;
-  console.log(ctaNotice);
+
+  const onRefresh = async () => {
+    try {
+      setRefreshing(true);
+      refetch();
+    } catch (e) {
+      console.log("순위 새로고침 오류:", error);
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
   useEffect(() => {
     refetch();
   });
@@ -71,7 +84,11 @@ export default () => {
         <Header>
           <HeaderTitle>수험 소식</HeaderTitle>
         </Header>
-        <ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+          }
+        >
           <NoticeList>
             {ctaNotice && ctaNotice.length !== 0
               ? ctaNotice.map(notice => {
@@ -92,7 +109,11 @@ export default () => {
         <Header>
           <HeaderTitle>학습 정보</HeaderTitle>
         </Header>
-        <ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+          }
+        >
           <NoticeList>
             {eduNotice && eduNotice.length !== 0
               ? eduNotice.map(notice => {

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { StyleSheet, RefreshControl } from "react-native";
+import { StyleSheet, RefreshControl, Alert } from "react-native";
 // TouchableWithoutFeedback를 아래와 같이 가져올 경우 작동 안할 수 있음
 // import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { Table, Row, Cols } from "react-native-table-component";
 
 import Picker from "../../components/Picker";
@@ -58,19 +58,40 @@ const Title = styled.Text`
 
 export default () => {
   const [round, setRound] = useState("");
-  const [episode, setEpisode] = useState(null);
-  const [academy, setAcademy] = useState(null);
+  const [episode, setEpisode] = useState("");
+  const [academy, setAcademy] = useState("");
+  const [year, setYear] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const [skipBool, setSkipBool] = useState(true);
+  const [info, setInfo] = useState({});
+  const [newData, setNewData] = useState({});
 
-  const { data, loding, refetch } = useQuery(SEE_ROUND, {
+  const [seeRoundExecute, { data, refetch }] = useLazyQuery(SEE_ROUND, {
     variables: {
-      round,
-      episode,
-      academy
+      round: info.round,
+      episode: info.episode,
+      academy: info.academy,
+      year: info.year
     },
+    onCompleted: data => {
+      round === info.round &&
+      episode === info.episode &&
+      academy === info.academy &&
+      year === info.year
+        ? setNewData(data)
+        : null;
+    }
     //skip 속성을 통해 순위버튼 클릭시 쿼리 작동되도록 함.
-    skip: !round || !episode || skipBool
+    // skip:
+    //   round === "" ||
+    //   round !== info.round ||
+    //   episode === "" ||
+    //   episode !== info.episode ||
+    //   academy === "" ||
+    //   academy !== info.academy ||
+    //   year === "" ||
+    //   year !== info.year ||
+    //   skipBool
   });
 
   const {
@@ -80,9 +101,9 @@ export default () => {
     taxAccsRankArr,
     totalScoreArr,
     totalRankArr
-  } = makeRankList(data);
+  } = makeRankList(newData);
 
-  const { roundArr, episodeArr, academyArr } = basicInfo();
+  const { roundArr, episodeArr, academyArr, yearArr } = basicInfo();
 
   const pickerHandler = stateSet => {
     return value => stateSet(value);
@@ -114,9 +135,12 @@ export default () => {
   const rankWatcher = () => {
     // skipBool 조정을 통해 useQuery skip 여부 통제
     try {
-      setSkipBool(false);
-      if (data) {
-        refetch();
+      if (round && episode && academy && year) {
+        setInfo({ round, episode, academy, year });
+        seeRoundExecute();
+        setSkipBool(false);
+      } else {
+        Alert.alert("모든사항을 체크해 주세요");
       }
     } catch (error) {
       console.log("순위가져오기 오류::", error);
@@ -136,22 +160,25 @@ export default () => {
     }
   };
 
-  useEffect(() => {
-    if (data) {
-      refetch();
-    }
-  }, [data]);
-
   return (
     <Container>
       <Header>
         <HeaderColumn>
-          <Title>어느 학원?</Title>
+          <Title>연도</Title>
+          <Picker
+            placeholder="연도"
+            items={yearArr}
+            value={year}
+            onValueChange={pickerHandler(setYear)}
+            size={["100px", "40px"]}
+          />
+          <Title>학원</Title>
           <Picker
             placeholder="학원 선택"
             items={academyArr}
             value={academy}
             onValueChange={pickerHandler(setAcademy)}
+            size={["100px", "40px"]}
           />
         </HeaderColumn>
         <HeaderColumn>
@@ -202,11 +229,13 @@ export default () => {
               />
               <MyRank
                 borderStyle={{ borderWidth: 2, borderColor: styles.blackColor }}
-                academy={academy}
-                round={round}
-                episode={episode}
+                academy={info.academy}
+                round={info.round}
+                episode={info.episode}
+                year={info.year}
                 style={tablestyles.head}
                 textStyle={tablestyles.text}
+                skipBool={skipBool}
               />
               <Cols data={tableInfo.tableData} textStyle={tablestyles.text} />
             </Table>

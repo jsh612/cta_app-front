@@ -27,7 +27,12 @@ export const basicInfo = () => {
     { label: "위너스", value: "위너스" }
   ];
 
-  return { roundArr, episodeArr, academyArr };
+  const yearArr = [
+    { label: "2020", value: 2020 },
+    { label: "2021", value: 2021 },
+    { label: "2022", value: 2022 }
+  ];
+  return { roundArr, episodeArr, academyArr, yearArr };
 };
 
 //data를 활용하여 순위 표시에 필요한 배열 생성
@@ -96,5 +101,5 @@ export const average = arr => {
       leng = leng - 1;
     }
   });
-  return (sum / leng).toFixed(1);
+  return Number.isNaN(sum / leng) ? "-" : (sum / leng).toFixed(1);
 };

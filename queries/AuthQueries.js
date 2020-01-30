@@ -16,6 +16,7 @@ export const ME = gql`
         score
         academy
         rank
+        year
       }
       taxAccs {
         round
@@ -23,6 +24,7 @@ export const ME = gql`
         score
         academy
         rank
+        year
       }
       totalAccs {
         round
@@ -30,6 +32,7 @@ export const ME = gql`
         score
         academy
         rank
+        year
       }
     }
   }

@@ -40,6 +40,7 @@ export default ({ navigation }) => {
   const [round, setRound] = useState("");
   const [episode, setEpisode] = useState("");
   const [academy, setAcademy] = useState("");
+  const [year, setYear] = useState("");
   const [loading, setLoading] = useState(false);
 
   const accInput = useInput("");
@@ -50,7 +51,8 @@ export default ({ navigation }) => {
       score: Number(accInput.value),
       round: round,
       episode: episode,
-      academy
+      academy,
+      year
     }
   });
 
@@ -59,7 +61,8 @@ export default ({ navigation }) => {
       score: Number(taxAccInput.value),
       round: round,
       episode: episode,
-      academy
+      academy,
+      year
     }
   });
 
@@ -83,6 +86,7 @@ export default ({ navigation }) => {
       setRound("");
       setEpisode("");
       setAcademy("");
+      setYear("");
       return Alert.alert("성적이 제출되었습니다.");
     } catch (error) {
       console.log("성적입력 error:", error);
@@ -93,7 +97,7 @@ export default ({ navigation }) => {
 
   const goRank = () => navigation.navigate("Rank");
 
-  const { roundArr, episodeArr, academyArr } = basicInfo();
+  const { roundArr, episodeArr, academyArr, yearArr } = basicInfo();
 
   const pickerHandler = stateSet => {
     return value => stateSet(value);
@@ -102,6 +106,15 @@ export default ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container behavior="padding" enabled>
+        <ContentWrapper>
+          <Title>연도 선택</Title>
+          <Picker
+            placeholder="연도 선택"
+            items={yearArr}
+            value={year}
+            onValueChange={pickerHandler(setYear)}
+          />
+        </ContentWrapper>
         <ContentWrapper>
           <Title>어느 학원?</Title>
           <Picker
