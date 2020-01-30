@@ -90,6 +90,7 @@ export default ({ navigation }) => {
       return Alert.alert("성적이 제출되었습니다.");
     } catch (error) {
       console.log("성적입력 error:", error);
+      return Alert.alert("입력된 성적을 확인해 주세요");
     } finally {
       setLoading(false);
     }

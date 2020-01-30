@@ -15,7 +15,7 @@ const Touchable = styled.TouchableOpacity`
   background: ${styles.blackColor};
   border-radius: 10px;
   width: ${constants.width / 1.4};
-  margin: 10px 0px;
+  margin: 5px 0px;
   padding: 5px;
 `;
 
@@ -65,8 +65,8 @@ const Notice = ({ title, content, url }) => {
         isVisible={modalVisible}
         backdropOpacity={0.9}
         onBackdropPress={() => setModalVisible(false)}
-        animationIn={"zoomInDown"}
-        animationOut={"zoomOutDown"}
+        animationIn={"slideInLeft"}
+        animationOut={"slideOutRight"}
       >
         <ContentContainer>
           <CloseBtn onPress={() => setModalVisible(false)}>

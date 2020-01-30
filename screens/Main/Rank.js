@@ -66,33 +66,39 @@ export default () => {
   const [info, setInfo] = useState({});
   const [newData, setNewData] = useState({});
 
-  const [seeRoundExecute, { data, refetch }] = useLazyQuery(SEE_ROUND, {
-    variables: {
-      round: info.round,
-      episode: info.episode,
-      academy: info.academy,
-      year: info.year
-    },
-    onCompleted: data => {
-      round === info.round &&
-      episode === info.episode &&
-      academy === info.academy &&
-      year === info.year
-        ? setNewData(data)
-        : null;
+  // const { data, refetch, loading, called } = useQuery(SEE_ROUND, {
+  const [seeRoundExecute, { data, refetch, loading, called }] = useLazyQuery(
+    SEE_ROUND,
+    {
+      variables: {
+        round: info.round,
+        episode: info.episode,
+        academy: info.academy,
+        year: info.year
+      },
+      onCompleted: data => {
+        setNewData(data);
+        // round === info.round &&
+        // episode === info.episode &&
+        // academy === info.academy &&
+        // year === info.year
+        //   ? setNewData(data)
+        //   : null;
+      },
+      fetchPolicy: "network-only"
+      //skip 속성을 통해 순위버튼 클릭시 쿼리 작동되도록 함.
+      // skip:
+      //   round === "" ||
+      //   round !== info.round ||
+      //   episode === "" ||
+      //   episode !== info.episode ||
+      //   academy === "" ||
+      //   academy !== info.academy ||
+      //   year === "" ||
+      //   year !== info.year ||
+      //   skipBool
     }
-    //skip 속성을 통해 순위버튼 클릭시 쿼리 작동되도록 함.
-    // skip:
-    //   round === "" ||
-    //   round !== info.round ||
-    //   episode === "" ||
-    //   episode !== info.episode ||
-    //   academy === "" ||
-    //   academy !== info.academy ||
-    //   year === "" ||
-    //   year !== info.year ||
-    //   skipBool
-  });
+  );
 
   const {
     accsScoreArr,
@@ -132,12 +138,17 @@ export default () => {
       }
     : null;
 
-  const rankWatcher = () => {
+  const rankWatcher = async () => {
     // skipBool 조정을 통해 useQuery skip 여부 통제
     try {
       if (round && episode && academy && year) {
         setInfo({ round, episode, academy, year });
-        seeRoundExecute();
+        if (!skipBool) {
+          await refetch();
+        } else {
+          seeRoundExecute();
+        }
+        console.log("new::::", newData);
         setSkipBool(false);
       } else {
         Alert.alert("모든사항을 체크해 주세요");
@@ -151,7 +162,7 @@ export default () => {
     try {
       if (!(!round || !episode || skipBool)) {
         setRefreshing(true);
-        refetch();
+        await refetch();
       }
     } catch (e) {
       console.log("순위 새로고침 오류:", error);
@@ -199,7 +210,11 @@ export default () => {
             size={["100px", "40px"]}
           />
         </HeaderColumn>
-        <ScroeButton text={"순위 보기"} onPress={rankWatcher} />
+        <ScroeButton
+          text={"순위 보기"}
+          onPress={rankWatcher}
+          loading={loading}
+        />
       </Header>
       <ScrollView
         refreshControl={

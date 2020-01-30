@@ -1,36 +1,36 @@
 // 입력 기본정보 출력 (순환, 회차, 학원)
 export const basicInfo = () => {
   const roundArr = [
-    { label: "동차GS", value: 1 },
-    { label: "2순환", value: 2 },
-    { label: "3순환", value: 3 }
+    { label: "동차GS", key: "동차GS", value: 1 },
+    { label: "2순환", key: "2순환", value: 2 },
+    { label: "3순환", key: "3순환", value: 3 }
   ];
 
   const episodeArr = [
-    { label: "1회", value: 1 },
-    { label: "2회", value: 2 },
-    { label: "3회", value: 3 },
-    { label: "4회", value: 4 },
-    { label: "5회", value: 5 },
-    { label: "6회", value: 6 },
-    { label: "7회", value: 7 },
-    { label: "8회", value: 8 },
-    { label: "9회", value: 9 },
-    { label: "10회", value: 10 },
-    { label: "11회", value: 11 },
-    { label: "12회", value: 12 }
+    { label: "1회", key: "1회", value: 1 },
+    { label: "2회", key: "2회", value: 2 },
+    { label: "3회", key: "3회", value: 3 },
+    { label: "4회", key: "4회", value: 4 },
+    { label: "5회", key: "5회", value: 5 },
+    { label: "6회", key: "6회", value: 6 },
+    { label: "7회", key: "7회", value: 7 },
+    { label: "8회", key: "8회", value: 8 },
+    { label: "9회", key: "9회", value: 9 },
+    { label: "10회", key: "10회", value: 10 },
+    { label: "11회", key: "11회", value: 11 },
+    { label: "12회", key: "12회", value: 12 }
   ];
 
   const academyArr = [
-    { label: "우리", value: "우리" },
-    { label: "나무", value: "나무" },
-    { label: "위너스", value: "위너스" }
+    { label: "우리", key: "우리", value: "우리" },
+    { label: "나무", key: "나무", value: "나무" },
+    { label: "위너스", key: "위너스", value: "위너스" }
   ];
 
   const yearArr = [
-    { label: "2020", value: 2020 },
-    { label: "2021", value: 2021 },
-    { label: "2022", value: 2022 }
+    { label: "2020", key: "2020", value: 2020 },
+    { label: "2021", key: "2021", value: 2021 },
+    { label: "2022", key: "2022", value: 2022 }
   ];
   return { roundArr, episodeArr, academyArr, yearArr };
 };

@@ -12,10 +12,9 @@ export default ({
   style,
   textStyle
 }) => {
-  const { data, refetch, loading } = useQuery(ME);
-  if (data) {
-    refetch();
-  }
+  const { data, refetch, loading } = useQuery(ME, {
+    fetchPolicy: "network-only"
+  });
   const accResult = (!loading
     ? data.me.accs.find(acc => {
         return (
