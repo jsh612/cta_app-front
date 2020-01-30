@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { StyleSheet, RefreshControl, Alert, Platform } from "react-native";
+import { RefreshControl, Alert, Platform } from "react-native";
 // TouchableWithoutFeedback를 아래와 같이 가져올 경우 작동 안할 수 있음
 // import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { useQuery, useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/react-hooks";
 import { Table, Row, Cols } from "react-native-table-component";
 
 import Picker from "../../components/Picker";
@@ -55,7 +55,7 @@ const ScrollView = styled.ScrollView`
 const TableWrapper = styled.View`
   flex: 1;
   padding: 16px;
-  padding-top: 30px;
+  margin-top: 30px;
   background-color: #fff;
 `;
 
@@ -174,7 +174,7 @@ export default ({ navigation }) => {
         setRefreshing(true);
         await refetch();
       }
-    } catch (e) {
+    } catch (error) {
       console.log("순위 새로고침 오류:", error);
     } finally {
       setRefreshing(false);
@@ -245,18 +245,18 @@ export default ({ navigation }) => {
             >
               <Row
                 data={tableInfo.tableHead}
-                style={tablestyles.head}
-                textStyle={tablestyles.text}
+                style={{ height: 40, backgroundColor: styles.lightGreyColor }}
+                textStyle={{ margin: 6, textAlign: "center", fontSize: 18 }}
               />
               <Row
                 data={tableInfo.tableSubHead}
-                style={tablestyles.head}
-                textStyle={tablestyles.text}
+                style={{ height: 40, backgroundColor: styles.lightGreyColor }}
+                textStyle={{ margin: 6, textAlign: "center", fontSize: 18 }}
               />
               <Row
                 data={tableInfo.averageData}
-                style={tablestyles.head}
-                textStyle={tablestyles.text}
+                style={{ height: 40, backgroundColor: styles.lightGreyColor }}
+                textStyle={{ margin: 6, textAlign: "center", fontSize: 18 }}
               />
               <MyRank
                 borderStyle={{ borderWidth: 2, borderColor: styles.blackColor }}
@@ -264,11 +264,14 @@ export default ({ navigation }) => {
                 round={info.round}
                 episode={info.episode}
                 year={info.year}
-                style={tablestyles.head}
-                textStyle={tablestyles.text}
+                style={{ height: 40, backgroundColor: styles.lightGreyColor }}
+                textStyle={{ margin: 6, textAlign: "center", fontSize: 18 }}
                 skipBool={skipBool}
               />
-              <Cols data={tableInfo.tableData} textStyle={tablestyles.text} />
+              <Cols
+                data={tableInfo.tableData}
+                textStyle={{ margin: 6, textAlign: "center", fontSize: 18 }}
+              />
             </Table>
           </TableWrapper>
         ) : null}
@@ -276,8 +279,3 @@ export default ({ navigation }) => {
     </Container>
   );
 };
-
-const tablestyles = StyleSheet.create({
-  head: { height: 40, backgroundColor: styles.lightGreyColor },
-  text: { margin: 6, textAlign: "center", fontSize: 18 }
-});

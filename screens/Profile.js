@@ -7,6 +7,7 @@ import styles from "../styles";
 import { basicInfo } from "../utils";
 import ScoreButton from "../components/ScoreButton";
 import TotalMine from "../components/TotalMine";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Container = styled.View`
   flex: 1;
@@ -37,9 +38,9 @@ const Title = styled.Text`
 `;
 
 export default () => {
-  const [round, setRound] = useState("");
+  const [round, setRound] = useState(0);
   const [academy, setAcademy] = useState("");
-  const [year, setYear] = useState("");
+  const [year, setYear] = useState(0);
 
   const { roundArr, academyArr, yearArr } = basicInfo();
 
@@ -78,7 +79,6 @@ export default () => {
             year={year}
             customWidth="70px"
             title="조회"
-            content="하이"
           />
         </Column>
       </ColumnWrapper>

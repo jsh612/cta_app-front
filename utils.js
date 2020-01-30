@@ -85,7 +85,7 @@ export const makeRankList = data => {
   };
 };
 
-//배열을 오름차순 또는 내림차순으로 정렬
+//성적을 오름차순 또는 내림차순으로 정렬
 export const sortFunc = (arr, bigger = true) => {
   return bigger ? arr.sort((a, b) => a - b) : arr.sort((a, b) => b - a);
 };
@@ -102,4 +102,72 @@ export const average = arr => {
     }
   });
   return Number.isNaN(sum / leng) ? "-" : (sum / leng).toFixed(1);
+};
+
+// 나의 전체 성적 보기에 사용 (테이블에 쓸 수 있을 배열 형태로 전환)
+export const mineList = (accResult, taxAccResult, totalAccResult) => {
+  const accsEpisode = [];
+  const accsScoreArr = [];
+  const accsRankArr = [];
+  const taxAccsEpisode = [];
+  const taxAccsScoreArr = [];
+  const taxAccsRankArr = [];
+  const totoalEpisode = [];
+  const totalScoreArr = [];
+  const totalRankArr = [];
+
+  const longestLength =
+    accResult.length > taxAccResult.length
+      ? accResult.length
+      : taxAccResult.length;
+
+  for (let i = 0; i < longestLength; i++) {
+    if (accResult[i]) {
+      accsEpisode.push(accResult[i].episode);
+      accsScoreArr.push(accResult[i].score);
+      accsRankArr.push(accResult[i].rank);
+    } else {
+      accsEpisode.push("-");
+      accsScoreArr.push("-");
+      accsRankArr.push("-");
+    }
+    if (taxAccResult[i]) {
+      taxAccsEpisode.push(taxAccResult[i].episode);
+      taxAccsScoreArr.push(taxAccResult[i].score);
+      taxAccsRankArr.push(taxAccResult[i].rank);
+    } else {
+      taxAccsEpisode.push("-");
+      taxAccsScoreArr.push("-");
+      taxAccsRankArr.push("-");
+    }
+    if (totalAccResult[i]) {
+      totoalEpisode.push(totalAccResult[i].episode);
+      totalScoreArr.push(totalAccResult[i].score);
+      totalRankArr.push(totalAccResult[i].rank);
+    } else {
+      totoalEpisode.push("-");
+      totalScoreArr.push("-");
+      totalRankArr.push("-");
+    }
+  }
+
+  return {
+    accsEpisode,
+    accsRankArr,
+    accsScoreArr,
+    taxAccsEpisode,
+    taxAccsRankArr,
+    taxAccsScoreArr,
+    totoalEpisode,
+    totalRankArr,
+    totalScoreArr
+  };
+};
+
+//회차순 정렬
+export const episodeSort = (arr1, arr2, arr3) => {
+  arr1.sort((a, b) => a.episode - b.episode);
+  arr2.sort((a, b) => a.episode - b.episode);
+  arr3.sort((a, b) => a.episode - b.episode);
+  return null;
 };

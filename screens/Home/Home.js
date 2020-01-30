@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { RefreshControl, ActivityIndicator } from "react-native";
 import constants from "../../constants";
@@ -67,7 +67,6 @@ export default () => {
         seeNotice: { ctaNotice, eduNotice }
       } = data;
       setNewData({ ctaNotice, eduNotice });
-      console.log(newdata ? newdata.ctaNotice : null);
     }
   });
 
@@ -82,6 +81,9 @@ export default () => {
     }
   };
 
+  useEffect(() => {
+    refetch();
+  });
   return (
     <Container>
       <Column>
@@ -95,7 +97,7 @@ export default () => {
         >
           <NoticeList>
             {newdata && newdata.ctaNotice && newdata.ctaNotice.length !== 0 ? (
-              newdata.ctaNotice.map(notice => {
+              newdata.ctaNotice.reverse().map(notice => {
                 return (
                   <Notice
                     key={notice.id}
