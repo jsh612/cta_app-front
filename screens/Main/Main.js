@@ -72,14 +72,17 @@ export default ({ navigation }) => {
       if (round === "" || episode === "") {
         return Alert.alert("순환과 회차를 모두 선택해주세요");
       }
+      if (accInput.value === "" && taxAccInput.value === "") {
+        return Alert.alert("한 과목 이상의 성적을 입력 해주세요.");
+      }
+      if (Number(accInput.value) > 100 || Number(taxAccInput.value) > 100) {
+        return Alert.alert("성적을 100점 이하로 입력 해주세요");
+      }
       if (accInput.value !== "") {
         await accMutation();
       }
       if (taxAccInput.value !== "") {
         await taxAccMutation();
-      }
-      if (accInput.value === "" && taxAccInput.value === "") {
-        return Alert.alert("한 과목 이상의 성적을 입력 해주세요.");
       }
       accInput.setValue("");
       taxAccInput.setValue("");

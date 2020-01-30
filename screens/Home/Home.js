@@ -122,7 +122,7 @@ export default () => {
         >
           <NoticeList>
             {newdata && newdata.eduNotice && newdata.eduNotice.length !== 0 ? (
-              newdata.eduNotice.map(notice => {
+              newdata.eduNotice.reverse().map(notice => {
                 return (
                   <Notice
                     key={notice.id}

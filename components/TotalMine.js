@@ -4,17 +4,19 @@ import PropTypes from "prop-types";
 import { Platform, ScrollView } from "react-native";
 import Modal from "react-native-modal";
 import { Ionicons } from "@expo/vector-icons";
-import { Linking } from "expo";
 
 import constants from "../constants";
 import styles from "../styles";
+import { useQuery } from "@apollo/react-hooks";
+import { ME } from "../queries/AuthQueries";
 
 const Touchable = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background: ${styles.blackColor};
   border-radius: 10px;
-  width: ${constants.width / 1.4};
+  width: ${props =>
+    props.customWidth ? props.customWidth : constants.width / 1.4};
   margin: 5px 0px;
   padding: 5px;
 `;
@@ -49,17 +51,45 @@ const ContentText = styled.Text`
   font-size: 17px;
 `;
 
-const UrlText = styled.Text`
-  margin-top: 5px;
-  font-size: 17px;
-  text-decoration: underline;
-  text-align: right;
-`;
-
-const Notice = ({ title, content, url }) => {
+const TotalMine = ({ round, academy, year, title, content, customWidth }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [newData, setNewData] = useState({});
+
+  const { data, loading } = useQuery(ME, {
+    fetchPolicy: "network-only"
+  });
+
+  const accResult = (!loading
+    ? data.me.accs.find(acc => {
+        return (
+          acc.academy === academy && acc.round === round && acc.year === year
+        );
+      })
+    : null) || { rank: "-", score: "-" };
+
+  const taxAccResult = (!loading
+    ? data.me.taxAccs.find(taxAcc => {
+        return (
+          taxAcc.academy === academy &&
+          taxAcc.round === round &&
+          taxAcc.year === year
+        );
+      })
+    : null) || { rank: "-", score: "-" };
+
+  const totalAccResult = (!loading
+    ? data.me.totalAccs.find(totalAcc => {
+        return (
+          totalAcc.academy === academy &&
+          totalAcc.round === round &&
+          totalAcc.year === year
+        );
+      })
+    : null) || { rank: "-", score: "-" };
+
+  console.log(totalAccResult);
   return (
-    <Touchable onPress={() => setModalVisible(true)}>
+    <Touchable customWidth={customWidth} onPress={() => setModalVisible(true)}>
       <Title>{title}</Title>
       <Modal
         isVisible={modalVisible}
@@ -78,7 +108,6 @@ const Notice = ({ title, content, url }) => {
           <ScrollView>
             <Column>
               <ContentText>{content}</ContentText>
-              <UrlText onPress={() => Linking.openURL(url)}>{url}</UrlText>
             </Column>
           </ScrollView>
         </ContentContainer>
@@ -87,10 +116,12 @@ const Notice = ({ title, content, url }) => {
   );
 };
 
-Notice.propTypes = {
+TotalMine.propTypes = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  url: PropTypes.string
+  customWidth: PropTypes.string.isRequired,
+  round: PropTypes.number.isRequired,
+  academy: PropTypes.string.isRequired,
+  year: PropTypes.number.isRequired
 };
 
-export default Notice;
+export default TotalMine;

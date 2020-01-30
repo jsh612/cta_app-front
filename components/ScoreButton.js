@@ -6,15 +6,15 @@ import { ActivityIndicator } from "react-native";
 import styles from "../styles";
 
 const Touchable = styled.TouchableOpacity`
-  margin-top: 10px;
+  margin: 10px 5px;
 `;
 
 const Container = styled.View`
   background-color: ${styles.blackColor};
   padding: 10px;
-  margin: 0px 50px;
   border-radius: 4px;
-  width: ${constants.width / 2};
+  width: ${props =>
+    props.customWidth ? props.customWidth : constants.width / 2};
 `;
 
 const Text = styled.Text`
@@ -24,22 +24,29 @@ const Text = styled.Text`
   font-weight: 900;
 `;
 
-const ScroeButton = ({ text, onPress, loading = false, bgColor = null }) => (
+const ScoreButton = ({
+  text,
+  onPress,
+  customWidth,
+  loading = false,
+  bgColor = null
+}) => (
   //# disabled
   //  - 로딩중일 경우 컴포넌트와의 상호작용 기능을 끊기 위해
   //  - https://facebook.github.io/react-native/docs/touchablewithoutfeedback#disabled
   <Touchable disabled={loading} onPress={onPress}>
-    <Container bgColor={bgColor}>
+    <Container bgColor={bgColor} customWidth={customWidth}>
       {/* ActivityIndicator -> 로딩 표시 나타냄 */}
       {loading ? <ActivityIndicator color={"white"} /> : <Text>{text}</Text>}
     </Container>
   </Touchable>
 );
 
-ScroeButton.propTypes = {
+ScoreButton.propTypes = {
   text: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  customWidth: PropTypes.string
 };
 
-export default ScroeButton;
+export default ScoreButton;

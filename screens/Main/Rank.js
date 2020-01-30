@@ -8,7 +8,7 @@ import { Table, Row, Cols } from "react-native-table-component";
 
 import Picker from "../../components/Picker";
 import constants from "../../constants";
-import ScroeButton from "../../components/ScoreButton";
+import ScoreButton from "../../components/ScoreButton";
 import styles from "../../styles";
 import { SEE_ROUND } from "../../queries/ScoreQueries";
 import { basicInfo, makeRankList, sortFunc, average } from "../../utils";
@@ -226,7 +226,7 @@ export default ({ navigation }) => {
             size={["100px", "40px"]}
           />
         </HeaderColumn>
-        <ScroeButton
+        <ScoreButton
           text={"순위 보기"}
           onPress={rankWatcher}
           loading={loading}

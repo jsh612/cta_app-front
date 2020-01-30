@@ -12,7 +12,7 @@ const Wrapper = styled.View`
 `;
 
 const Icon = styled(Ionicons)`
-  margin: 6px;
+  margin: 8px 5px;
 `;
 
 const Picker = ({
@@ -35,7 +35,7 @@ const Picker = ({
             name={
               Platform.OS === "ios" ? "ios-arrow-down" : "md-arrow-dropdown"
             }
-            size={30}
+            size={25}
           />
         );
       }}
