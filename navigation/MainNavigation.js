@@ -11,19 +11,6 @@ import { mainStackFactory } from "./stackMaker";
 
 const mainTab = createBottomTabNavigator(
   {
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        tabBarIcon: ({ focused }) => (
-          <NavIcon
-            size={40}
-            name={Platform.OS === "ios" ? "ios-person" : "md-person"}
-            focused={focused}
-            color={styles.blackColor}
-          />
-        )
-      }
-    },
     Home: {
       screen: Home,
       navigationOptions: {
@@ -53,20 +40,20 @@ const mainTab = createBottomTabNavigator(
           />
         )
       }
+    },
+    Profile: {
+      screen: Profile,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <NavIcon
+            size={40}
+            name={Platform.OS === "ios" ? "ios-person" : "md-person"}
+            focused={focused}
+            color={styles.blackColor}
+          />
+        )
+      }
     }
-    // Profile: {
-    //   screen: Profile,
-    //   navigationOptions: {
-    //     tabBarIcon: ({ focused }) => (
-    //       <NavIcon
-    //         size={40}
-    //         name={Platform.OS === "ios" ? "ios-person" : "md-person"}
-    //         focused={focused}
-    //         color={styles.blackColor}
-    //       />
-    //     )
-    //   }
-    // }
   },
   {
     tabBarOptions: {

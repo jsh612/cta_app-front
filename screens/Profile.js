@@ -41,7 +41,6 @@ export default () => {
   const [round, setRound] = useState(0);
   const [academy, setAcademy] = useState("");
   const [year, setYear] = useState(0);
-
   const { roundArr, academyArr, yearArr } = basicInfo();
 
   const pickerHandler = stateSet => {

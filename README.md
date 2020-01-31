@@ -44,6 +44,11 @@
 - 이를 위해 navigation.addEventListener 사용
 - https://reactnavigation.org/docs/en/function-after-focusing-screen.html
 
+### 8. useState의 상태 변경시 re-render 이해
+
+- 상태 변경시 변경된 상태는, 변경전 상태로 일단 render 이후 re-render시 변경된 상태가 반영되여
+  페이지가 render 된다.
+
 ## 개선해야할 사항
 
 - 가입 -> 로그인 id 전달

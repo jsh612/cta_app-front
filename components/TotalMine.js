@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Platform, ScrollView, RefreshControl, Alert } from "react-native";
+import {
+  Platform,
+  ScrollView,
+  RefreshControl,
+  Alert,
+  ActivityIndicator
+} from "react-native";
 import Modal from "react-native-modal";
 import { Ionicons } from "@expo/vector-icons";
 import { Table, Row, Cols } from "react-native-table-component";
 
 import constants from "../constants";
 import styles from "../styles";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { ME } from "../queries/AuthQueries";
 import { episodeSort, mineList } from "../utils";
 
@@ -56,15 +62,18 @@ const TableWrapper = styled.View`
 const TotalMine = ({ round, academy, year, title, customWidth }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [cols, setCols] = useState(null);
-  const [makingCols, setMakingCols] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [makingColsBool, setMakingColsBool] = useState(false);
 
-  const { data, loading, refetch } = useQuery(ME, {
-    fetchPolicy: "network-only"
+  const [trigger, { data, loading, refetch }] = useLazyQuery(ME, {
+    fetchPolicy: "network-only",
+    onCompleted: () => {
+      return setLoaded(true);
+    }
   });
 
   const accResult =
-    !loading && data.me
+    loaded && data
       ? data.me.accs.filter(acc => {
           return (
             acc.academy === academy && acc.round === round && acc.year === year
@@ -73,7 +82,7 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
       : null;
 
   const taxAccResult =
-    !loading && data.me
+    loaded && data
       ? data.me.taxAccs.filter(taxAcc => {
           return (
             taxAcc.academy === academy &&
@@ -84,7 +93,7 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
       : null;
 
   const totalAccResult =
-    !loading && data.me
+    loaded && data
       ? data.me.totalAccs.filter(totalAcc => {
           return (
             totalAcc.academy === academy &&
@@ -109,39 +118,19 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
     ]
   };
 
-  if (!loading) {
+  if (loaded && data) {
     episodeSort(accResult, taxAccResult, totalAccResult);
   }
-
-  if (round !== 0 && academy !== "" && year !== 0 && makingCols) {
+  if (round !== 0 && academy !== "" && year !== 0 && makingColsBool && loaded) {
     const colsObj = mineList(accResult, taxAccResult, totalAccResult);
     setCols(colsObj);
-    if (cols) {
-      setMakingCols(false);
+    if (colsObj) {
+      setMakingColsBool(false);
+      setModalVisible(true);
     }
+    setLoaded(false);
   }
-  const onRefresh = async () => {
-    try {
-      setRefreshing(true);
-      await refetch();
-    } catch (error) {
-      console.log("순위 새로고침 오류:", error);
-    } finally {
-      setRefreshing(false);
-    }
-  };
 
-  useEffect(() => {
-    if (refetch && !loading && makingCols) {
-      // && !loading && round !== 0 && academy !== "" && year !== 0
-      // 작성 중 다른 탭 갔다가 돌아 왔을때 refetch
-      try {
-        refetch();
-      } catch (error) {
-        console.log("refetch 에러", error);
-      }
-    }
-  });
   return (
     <Touchable
       customWidth={customWidth}
@@ -156,11 +145,12 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
         ) {
           return Alert.alert("모든사항을 선택해 주세요");
         }
-        setModalVisible(true);
-        setMakingCols(true);
+        setMakingColsBool(true);
+        trigger();
+        // setModalVisible(true);
       }}
     >
-      <Title>{title}</Title>
+      {loading ? <ActivityIndicator color={"white"} /> : <Title>{title}</Title>}
       <Modal
         isVisible={modalVisible}
         backdropOpacity={0.7}
@@ -175,11 +165,7 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
               name={Platform.OS === "ios" ? "ios-close" : "md-close"}
             />
           </CloseBtn>
-          <ScrollView
-            refreshControl={
-              <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
-            }
-          >
+          <ScrollView>
             <TableWrapper>
               <Table
                 borderStyle={{ borderWidth: 2, borderColor: styles.blackColor }}

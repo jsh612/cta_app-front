@@ -71,10 +71,9 @@ export default ({ navigation }) => {
     }
   });
 
-  const onRefresh = async () => {
+  const onRefresh = () => {
     try {
       setRefreshing(true);
-      // await refetch();
       trigger();
     } catch (error) {
       console.log("순위 새로고침 오류:", error);
@@ -85,14 +84,11 @@ export default ({ navigation }) => {
 
   useEffect(() => {
     //navigation.addListener을 이용해여 탭 선택 되었을 시 공지를 fetch하도록 한다.
-    console.log("eff:");
     if (data && newData) {
       const focusFunc = navigation.addListener("didFocus", () => {
         trigger();
       });
       return () => focusFunc.remove();
-    } else {
-      trigger();
     }
   }, [newData]);
 
