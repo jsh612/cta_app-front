@@ -15,6 +15,9 @@ export default ({
   const { data, refetch, loading } = useQuery(ME, {
     fetchPolicy: "network-only"
   });
+  if (data) {
+    refetch();
+  }
   const accResult = (!loading
     ? data.me.accs.find(acc => {
         return (

@@ -54,7 +54,6 @@ const NoticeList = styled.View`
 `;
 
 export default ({ navigation }) => {
-  const [refreshing, setRefreshing] = useState(false);
   const [newData, setNewData] = useState(null);
 
   const [trigger, { data, loading, refetch }] = useLazyQuery(SEE_NOTICE, {
@@ -63,7 +62,6 @@ export default ({ navigation }) => {
     },
     fetchPolicy: "network-only",
     onCompleted: data => {
-      console.log("여기도:", data);
       const {
         seeNotice: { ctaNotice, eduNotice }
       } = data;
@@ -73,12 +71,9 @@ export default ({ navigation }) => {
 
   const onRefresh = () => {
     try {
-      setRefreshing(true);
       trigger();
     } catch (error) {
       console.log("순위 새로고침 오류:", error);
-    } finally {
-      setRefreshing(false);
     }
   };
 
@@ -104,7 +99,7 @@ export default ({ navigation }) => {
         </Header>
         <ScrollView
           refreshControl={
-            <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+            <RefreshControl onRefresh={onRefresh} refreshing={false} />
           }
         >
           <NoticeList>
@@ -131,7 +126,7 @@ export default ({ navigation }) => {
         </Header>
         <ScrollView
           refreshControl={
-            <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+            <RefreshControl onRefresh={onRefresh} refreshing={false} />
           }
         >
           <NoticeList>

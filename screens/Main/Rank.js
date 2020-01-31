@@ -55,7 +55,6 @@ const ScrollView = styled.ScrollView`
 const TableWrapper = styled.View`
   flex: 1;
   padding: 16px;
-  margin-top: 30px;
   background-color: #fff;
 `;
 
@@ -154,7 +153,8 @@ export default ({ navigation }) => {
       if (round && episode && academy && year) {
         setInfo({ round, episode, academy, year });
         if (!skipBool) {
-          await refetch();
+          // await refetch();
+          seeRoundExecute();
         } else {
           seeRoundExecute();
         }
@@ -172,7 +172,8 @@ export default ({ navigation }) => {
     try {
       if (!(!round || !episode || skipBool)) {
         setRefreshing(true);
-        await refetch();
+        // await refetch();
+        seeRoundExecute();
       }
     } catch (error) {
       console.log("순위 새로고침 오류:", error);
