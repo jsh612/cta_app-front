@@ -38,6 +38,12 @@
 - 이유는 useQuery가 기본값으로 해당 데이터를 cache에서 먼저 탐색 후 fetch 하기떄문이다.
 - 해결: fetchPolicy 속성을 "network-only"로 변경
 
+### 7. 탭 선택시 이벤트 실행 시키기
+
+- 홈 화면에서 새로운 공지를 탭 선택시 마다 fetch할 필요가 있었다.
+- 이를 위해 navigation.addEventListener 사용
+- https://reactnavigation.org/docs/en/function-after-focusing-screen.html
+
 ## 개선해야할 사항
 
 - 가입 -> 로그인 id 전달
@@ -45,3 +51,4 @@
 - 로딩 페이지 작성
 - 점수 입력값이 100점 이하인지 // 숫자가 맞는지 검사
 - fetchPolicy 를 network-only로 한 선택이 맞는지 점검
+- 홈에서 최신뉴스 정렬 (reverse 쓸시 새로고침할경우 이상해짐)

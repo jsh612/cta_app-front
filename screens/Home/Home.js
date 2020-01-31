@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { RefreshControl, ActivityIndicator } from "react-native";
 import constants from "../../constants";
 import Notice from "../../components/Notice";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { SEE_NOTICE } from "../../queries/NoticeQueries";
 import styles from "../../styles";
 
@@ -53,16 +53,17 @@ const NoticeList = styled.View`
   padding: 15px;
 `;
 
-export default () => {
+export default ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
-  const [newdata, setNewData] = useState(null);
+  const [newData, setNewData] = useState(null);
 
-  const { data, loading, refetch } = useQuery(SEE_NOTICE, {
+  const [trigger, { data, loading, refetch }] = useLazyQuery(SEE_NOTICE, {
     variables: {
       name: `${new Date().getFullYear()}`
     },
     fetchPolicy: "network-only",
     onCompleted: data => {
+      console.log("여기도:", data);
       const {
         seeNotice: { ctaNotice, eduNotice }
       } = data;
@@ -73,8 +74,9 @@ export default () => {
   const onRefresh = async () => {
     try {
       setRefreshing(true);
-      await refetch();
-    } catch (e) {
+      // await refetch();
+      trigger();
+    } catch (error) {
       console.log("순위 새로고침 오류:", error);
     } finally {
       setRefreshing(false);
@@ -82,8 +84,22 @@ export default () => {
   };
 
   useEffect(() => {
-    refetch();
-  });
+    //navigation.addListener을 이용해여 탭 선택 되었을 시 공지를 fetch하도록 한다.
+    console.log("eff:");
+    if (data && newData) {
+      const focusFunc = navigation.addListener("didFocus", () => {
+        trigger();
+      });
+      return () => focusFunc.remove();
+    } else {
+      trigger();
+    }
+  }, [newData]);
+
+  useEffect(() => {
+    trigger();
+  }, []);
+
   return (
     <Container>
       <Column>
@@ -96,8 +112,8 @@ export default () => {
           }
         >
           <NoticeList>
-            {newdata && newdata.ctaNotice && newdata.ctaNotice.length !== 0 ? (
-              newdata.ctaNotice.reverse().map(notice => {
+            {newData && newData.ctaNotice && newData.ctaNotice.length !== 0 ? (
+              newData.ctaNotice.reverse().map(notice => {
                 return (
                   <Notice
                     key={notice.id}
@@ -123,8 +139,8 @@ export default () => {
           }
         >
           <NoticeList>
-            {newdata && newdata.eduNotice && newdata.eduNotice.length !== 0 ? (
-              newdata.eduNotice.reverse().map(notice => {
+            {newData && newData.eduNotice && newData.eduNotice.length !== 0 ? (
+              newData.eduNotice.reverse().map(notice => {
                 return (
                   <Notice
                     key={notice.id}

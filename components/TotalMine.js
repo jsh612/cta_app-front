@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Platform, ScrollView, RefreshControl } from "react-native";
+import { Platform, ScrollView, RefreshControl, Alert } from "react-native";
 import Modal from "react-native-modal";
 import { Ionicons } from "@expo/vector-icons";
 import { Table, Row, Cols } from "react-native-table-component";
@@ -130,6 +130,7 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
       setRefreshing(false);
     }
   };
+
   useEffect(() => {
     if (refetch && !loading && makingCols) {
       // && !loading && round !== 0 && academy !== "" && year !== 0
@@ -145,6 +146,16 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
     <Touchable
       customWidth={customWidth}
       onPress={() => {
+        if (
+          round === 0 ||
+          !round ||
+          academy === "" ||
+          !academy ||
+          year === 0 ||
+          !year
+        ) {
+          return Alert.alert("모든사항을 선택해 주세요");
+        }
         setModalVisible(true);
         setMakingCols(true);
       }}
