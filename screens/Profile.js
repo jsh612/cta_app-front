@@ -8,6 +8,7 @@ import { basicInfo } from "../utils";
 import ScoreButton from "../components/ScoreButton";
 import TotalMine from "../components/TotalMine";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useLogOut } from "../AuthContext";
 
 const Container = styled.View`
   flex: 1;
@@ -46,6 +47,9 @@ export default () => {
   const pickerHandler = stateSet => {
     return value => stateSet(value);
   };
+
+  const logOut = useLogOut();
+
   return (
     <Container>
       <ColumnWrapper>
@@ -82,7 +86,7 @@ export default () => {
         </Column>
       </ColumnWrapper>
       <ColumnWrapper>
-        <ScoreButton customWidth="200px" text="로그아웃" onPress={() => null} />
+        <ScoreButton customWidth="200px" text="로그아웃" onPress={logOut} />
       </ColumnWrapper>
     </Container>
   );

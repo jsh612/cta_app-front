@@ -165,7 +165,7 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
               name={Platform.OS === "ios" ? "ios-close" : "md-close"}
             />
           </CloseBtn>
-          <ScrollView>
+          <ScrollView maximumZoomScale={2}>
             <TableWrapper>
               <Table
                 borderStyle={{ borderWidth: 2, borderColor: styles.blackColor }}
@@ -188,7 +188,7 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
                       marginTop: 10,
                       marginBottom: 10,
                       textAlign: "center",
-                      fontSize: 13
+                      fontSize: 11
                     }}
                     data={[
                       cols.accsEpisode,
