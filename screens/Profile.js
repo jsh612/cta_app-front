@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Text, ScrollView } from "react-native";
+import { StatusBar } from "react-native";
 import Picker from "../components/Picker";
 import constants from "../constants";
 import styles from "../styles";
 import { basicInfo } from "../utils";
 import ScoreButton from "../components/ScoreButton";
 import TotalMine from "../components/TotalMine";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useLogOut } from "../AuthContext";
 
 const Container = styled.View`
@@ -24,7 +23,7 @@ const ColumnWrapper = styled.View`
 `;
 
 const Column = styled.View`
-  width: ${constants.width / 1.1};
+  width: ${constants.width / 1.1}px;
   justify-content: space-around;
   flex-direction: row;
   align-items: center;
@@ -52,6 +51,7 @@ export default () => {
 
   return (
     <Container>
+      <StatusBar barStyle="dark-content" />
       <ColumnWrapper>
         <Title>나의 성적 조회</Title>
         <Column>
@@ -80,7 +80,7 @@ export default () => {
             round={round}
             academy={academy}
             year={year}
-            customWidth="70px"
+            customWidth={"70px"}
             title="조회"
           />
         </Column>

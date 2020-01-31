@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
-import { RefreshControl, ActivityIndicator } from "react-native";
+import styled from "styled-components";
+import { RefreshControl, ActivityIndicator, StatusBar } from "react-native";
 import constants from "../../constants";
 import Notice from "../../components/Notice";
-import { useQuery, useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/react-hooks";
 import { SEE_NOTICE } from "../../queries/NoticeQueries";
 import styles from "../../styles";
 
@@ -20,8 +20,8 @@ const Column = styled.View`
   /* flex: 1; */
   justify-content: center;
   align-items: center;
-  height: ${constants.height / 3};
-  width: ${constants.width / 1.1};
+  height: ${constants.height / 3}px;
+  width: ${constants.width / 1.1}px;
   border: solid 2px black;
   padding-top: 10px;
 `;
@@ -43,7 +43,7 @@ const HeaderTitle = styled.Text`
 `;
 
 const ScrollView = styled.ScrollView`
-  width: ${constants.width / 1.1};
+  width: ${constants.width / 1.1}px;
 `;
 
 const NoticeList = styled.View`
@@ -93,6 +93,7 @@ export default ({ navigation }) => {
 
   return (
     <Container>
+      <StatusBar barStyle="dark-content" />
       <Column>
         <Header>
           <HeaderTitle>수험 소식</HeaderTitle>

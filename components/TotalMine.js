@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import {
-  Platform,
-  ScrollView,
-  RefreshControl,
-  Alert,
-  ActivityIndicator
-} from "react-native";
+import { Platform, ScrollView, Alert, ActivityIndicator } from "react-native";
 import Modal from "react-native-modal";
 import { Ionicons } from "@expo/vector-icons";
 import { Table, Row, Cols } from "react-native-table-component";
 
 import constants from "../constants";
 import styles from "../styles";
-import { useQuery, useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/react-hooks";
 import { ME } from "../queries/AuthQueries";
 import { episodeSort, mineList } from "../utils";
 
@@ -23,8 +17,7 @@ const Touchable = styled.TouchableOpacity`
   align-items: center;
   background: ${styles.blackColor};
   border-radius: 10px;
-  width: ${props =>
-    props.customWidth ? props.customWidth : constants.width / 1.4};
+  width: ${props => props.customWidth};
   margin: 5px 0px;
   padding: 5px;
 `;
@@ -56,7 +49,7 @@ const TableWrapper = styled.View`
   padding: 5px;
   margin-top: 30px;
   background-color: #fff;
-  width: ${constants.width / 1.3};
+  width: ${constants.width / 1.3}px;
 `;
 
 const TotalMine = ({ round, academy, year, title, customWidth }) => {

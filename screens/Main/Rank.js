@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { RefreshControl, Alert, Platform } from "react-native";
+import { RefreshControl, Alert, Platform, StatusBar } from "react-native";
 // TouchableWithoutFeedback를 아래와 같이 가져올 경우 작동 안할 수 있음
 // import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useLazyQuery } from "@apollo/react-hooks";
@@ -24,7 +24,7 @@ const Container = styled.View`
 const BackBtn = styled.TouchableOpacity`
   align-self: flex-start;
   position: absolute;
-  top: -50px;
+  top: -75px;
   margin-left: 10px;
 `;
 
@@ -33,12 +33,12 @@ const Header = styled.View`
   justify-content: center;
   align-items: center;
   position: absolute;
-  margin: 10px 0px;
+  /* margin: 10px 0px; */
 `;
 
 const HeaderColumn = styled.View`
   flex: 1;
-  width: ${constants.width / 1.3};
+  width: ${constants.width / 1.3}px;
   height: 50px;
   justify-content: space-around;
   flex-direction: row;
@@ -47,7 +47,7 @@ const HeaderColumn = styled.View`
 `;
 
 const ScrollView = styled.ScrollView`
-  width: ${constants.width};
+  width: ${constants.width}px;
   margin-top: 200px;
   background-color: green;
 `;
@@ -184,6 +184,7 @@ export default ({ navigation }) => {
 
   return (
     <Container>
+      <StatusBar barStyle="dark-content" />
       <BackBtn onPress={() => navigation.goBack()}>
         <NavIcon
           size={40}
@@ -271,7 +272,7 @@ export default ({ navigation }) => {
               />
               <Cols
                 data={tableInfo.tableData}
-                textStyle={{ margin: 6, textAlign: "center", fontSize: 18 }}
+                textStyle={{ margin: 6, textAlign: "center", fontSize: 15 }}
               />
             </Table>
           </TableWrapper>

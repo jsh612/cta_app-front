@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
+import {
+  Keyboard,
+  TouchableWithoutFeedback,
+  Alert,
+  StatusBar
+} from "react-native";
 // TouchableWithoutFeedback를 아래와 같이 가져올 경우 작동 안할 수 있음
 // import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useMutation } from "@apollo/react-hooks";
@@ -21,7 +26,7 @@ const Container = styled.KeyboardAvoidingView`
 `;
 
 const ContentWrapper = styled.View`
-  width: ${constants.width / 1.3};
+  width: ${constants.width / 1.3}px;
   height: 50px;
   justify-content: space-between;
   flex-direction: row;
@@ -107,6 +112,7 @@ export default ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container behavior="padding" enabled>
+        <StatusBar barStyle="dark-content" />
         <ContentWrapper>
           <Title>연도 선택</Title>
           <Picker

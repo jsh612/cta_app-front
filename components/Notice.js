@@ -14,7 +14,7 @@ const Touchable = styled.TouchableOpacity`
   align-items: center;
   background: ${styles.blackColor};
   border-radius: 10px;
-  width: ${constants.width / 1.4};
+  width: ${constants.width / 1.4}px;
   margin: 5px 0px;
   padding: 5px;
 `;

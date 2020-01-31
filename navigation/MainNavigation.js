@@ -72,7 +72,9 @@ const mainTab = createBottomTabNavigator(
     tabBarOptions: {
       showLabel: false,
       style: {
-        backgroundColor: "green"
+        backgroundColor: "green",
+        padding: 5,
+        height: 60
       }
     }
   }

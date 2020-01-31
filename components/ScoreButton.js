@@ -13,8 +13,7 @@ const Container = styled.View`
   background-color: ${styles.blackColor};
   padding: 10px;
   border-radius: 4px;
-  width: ${props =>
-    props.customWidth ? props.customWidth : constants.width / 2};
+  width: ${constants.width / 2}px;
 `;
 
 const Text = styled.Text`
@@ -24,18 +23,12 @@ const Text = styled.Text`
   font-weight: 900;
 `;
 
-const ScoreButton = ({
-  text,
-  onPress,
-  customWidth,
-  loading = false,
-  bgColor = null
-}) => (
+const ScoreButton = ({ text, onPress, loading = false, bgColor = null }) => (
   //# disabled
   //  - 로딩중일 경우 컴포넌트와의 상호작용 기능을 끊기 위해
   //  - https://facebook.github.io/react-native/docs/touchablewithoutfeedback#disabled
   <Touchable disabled={loading} onPress={onPress}>
-    <Container bgColor={bgColor} customWidth={customWidth}>
+    <Container bgColor={bgColor}>
       {/* ActivityIndicator -> 로딩 표시 나타냄 */}
       {loading ? <ActivityIndicator color={"white"} /> : <Text>{text}</Text>}
     </Container>
@@ -45,8 +38,7 @@ const ScoreButton = ({
 ScoreButton.propTypes = {
   text: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  customWidth: PropTypes.string
+  loading: PropTypes.bool
 };
 
 export default ScoreButton;
