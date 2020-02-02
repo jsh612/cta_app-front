@@ -3,7 +3,9 @@ export default {
   greyColor: "#FAFAFA",
   darkGreyColor: "#999",
   lightGreyColor: "rgb(230, 230, 230)",
-  redColor: "#ED4956",
-  blueColor: "#3897f0",
-  darkBlueColor: "#003569"
+  redColor: "red",
+  orangeColor: "#FE822C",
+  blueColor: "blue",
+  darkBlueColor: "#003569",
+  greenColor: "#01A24B"
 };

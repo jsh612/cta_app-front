@@ -15,17 +15,18 @@ import { episodeSort, mineList } from "../utils";
 const Touchable = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
-  background: ${styles.blackColor};
-  border-radius: 10px;
-  width: ${props => props.customWidth};
-  margin: 5px 0px;
-  padding: 5px;
+  background: ${styles.orangeColor};
+  border-radius: 7px;
+  width: ${constants.width / 2}px;
+  margin: 10px 5px;
+  padding: 11px;
 `;
 
 const Title = styled.Text`
   color: white;
   font-weight: 900;
-  font-size: 17px;
+  text-align: center;
+  font-size: 16px;
 `;
 
 const ContentContainer = styled.View`
@@ -52,7 +53,7 @@ const TableWrapper = styled.View`
   width: ${constants.width / 1.3}px;
 `;
 
-const TotalMine = ({ round, academy, year, title, customWidth }) => {
+const TotalMine = ({ round, academy, year, title }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [cols, setCols] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -126,7 +127,6 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
 
   return (
     <Touchable
-      customWidth={customWidth}
       onPress={() => {
         if (
           round === 0 ||
@@ -207,7 +207,6 @@ const TotalMine = ({ round, academy, year, title, customWidth }) => {
 
 TotalMine.propTypes = {
   title: PropTypes.string.isRequired,
-  customWidth: PropTypes.string.isRequired,
   academy: PropTypes.string,
   round: PropTypes.number,
   year: PropTypes.number

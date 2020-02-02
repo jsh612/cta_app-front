@@ -1,19 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import styles from "../styles";
 
 const Container = styled.View`
   height: 40px;
+  padding: 5px;
 `;
 
 const TextInput = styled.TextInput`
-  width: 200px;
-  padding: 10px;
-  background-color: ${props => props.theme.greyColor};
-  border-radius: 4px;
-  border: 1px gray solid;
-  border-radius: 4px;
-  font-size: 16px;
+  width: 100px;
+  padding: 3px;
+  padding-left: 10px;
+  background-color: ${props => props.theme.blackColor};
+  font-size: 17px;
+  color: white;
+  border: 0px white solid;
 `;
 
 const ScoreInput = ({
@@ -28,6 +30,8 @@ const ScoreInput = ({
 }) => (
   <Container>
     <TextInput
+      style={{ borderBottomWidth: 2 }}
+      placeholderTextColor={styles.darkGreyColor}
       placeholder={placeholder}
       value={value}
       autoCapitalize={autoCapitalize}

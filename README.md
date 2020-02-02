@@ -42,6 +42,7 @@
 
 - 홈 화면에서 새로운 공지를 탭 선택시 마다 fetch할 필요가 있었다.
 - 이를 위해 navigation.addEventListener 사용
+- Home.js 참조
 - https://reactnavigation.org/docs/en/function-after-focusing-screen.html
 
 ### 8. useState의 상태 변경시 re-render 이해

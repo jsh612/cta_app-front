@@ -8,33 +8,43 @@ import { basicInfo } from "../utils";
 import ScoreButton from "../components/ScoreButton";
 import TotalMine from "../components/TotalMine";
 import { useLogOut } from "../AuthContext";
+import IOSAd from "../components/Ad";
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: skyblue;
-`;
-const ColumnWrapper = styled.View`
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0px;
-  background-color: blanchedalmond;
+  background: ${props => props.theme.blackColor};
 `;
 
-const Column = styled.View`
-  width: ${constants.width / 1.1}px;
-  justify-content: space-around;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 10px;
-`;
 const Title = styled.Text`
   font-weight: 900;
   font-size: 30px;
   text-align: center;
   color: ${styles.blackColor};
   margin-bottom: 50px;
+`;
+
+const PickerWrapper = styled.View`
+  margin: 30px 0px;
+`;
+
+const ColumnWrapper = styled.View`
+  justify-content: center;
+  align-items: center;
+  flex: 3;
+`;
+
+const WhiteWrapper = styled(ColumnWrapper)`
+  background-color: white;
+  width: ${constants.width}px;
+  flex: 9;
+  border-radius: 40px;
+`;
+
+const Column = styled.View`
+  justify-content: center;
+  align-items: center;
 `;
 
 export default () => {
@@ -51,43 +61,40 @@ export default () => {
 
   return (
     <Container>
-      <StatusBar barStyle="dark-content" />
-      <ColumnWrapper>
-        <Title>나의 성적 조회</Title>
+      <WhiteWrapper>
+        <Title>나의 성적 종합</Title>
         <Column>
           <Picker
             placeholder="연도"
             items={yearArr}
             value={year}
             onValueChange={pickerHandler(setYear)}
-            size={["85px", "40px"]}
+            size={["150px", "40px"]}
           />
-          <Picker
-            placeholder="학원"
-            items={academyArr}
-            value={academy}
-            onValueChange={pickerHandler(setAcademy)}
-            size={["85px", "40px"]}
-          />
+          <PickerWrapper>
+            <Picker
+              margin={"10px"}
+              placeholder="학원"
+              items={academyArr}
+              value={academy}
+              onValueChange={pickerHandler(setAcademy)}
+              size={["150px", "40px"]}
+            />
+          </PickerWrapper>
           <Picker
             placeholder="순환"
             items={roundArr}
             value={round}
             onValueChange={pickerHandler(setRound)}
-            size={["85px", "40px"]}
-          />
-          <TotalMine
-            round={round}
-            academy={academy}
-            year={year}
-            customWidth={"70px"}
-            title="조회"
+            size={["150px", "40px"]}
           />
         </Column>
-      </ColumnWrapper>
+      </WhiteWrapper>
       <ColumnWrapper>
-        <ScoreButton customWidth="200px" text="로그아웃" onPress={logOut} />
+        <TotalMine round={round} academy={academy} year={year} title="조회" />
+        <ScoreButton text="로그아웃" onPress={logOut} />
       </ColumnWrapper>
+      <IOSAd />
     </Container>
   );
 };

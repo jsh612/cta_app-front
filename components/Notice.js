@@ -12,11 +12,11 @@ import styles from "../styles";
 const Touchable = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
-  background: ${styles.blackColor};
+  background: ${styles.greenColor};
   border-radius: 10px;
   width: ${constants.width / 1.4}px;
   margin: 10px 0px;
-  padding: 5px;
+  padding: 6px 5px;
 `;
 
 const Title = styled.Text`

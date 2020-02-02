@@ -4,17 +4,25 @@ import { RefreshControl, ActivityIndicator, StatusBar } from "react-native";
 import constants from "../../constants";
 import Notice from "../../components/Notice";
 import { useLazyQuery } from "@apollo/react-hooks";
-import { LinearGradient } from "expo-linear-gradient";
 
 import { SEE_NOTICE } from "../../queries/NoticeQueries";
 import styles from "../../styles";
 import IOSAd from "../../components/Ad";
 
-const Container = styled(LinearGradient)`
+const Container = styled.View`
   flex: 1;
   justify-content: space-between;
   align-items: center;
-  padding-top: 100px;
+  padding-top: 50px;
+  background-color: black;
+`;
+
+const Wrapper = styled.View`
+  width: ${constants.width}px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  box-shadow: white 0px 0px 9px;
 `;
 
 const Column = styled.View`
@@ -24,28 +32,26 @@ const Column = styled.View`
   align-items: center;
   height: ${constants.height / 3}px;
   width: ${constants.width / 1.1}px;
-  border: solid 2px white;
   padding-top: 10px;
   border-radius: 10px;
-  box-shadow: white 0px 0px 6px;
+  background-color: white;
 `;
 
 const Header = styled.View`
-  background-color: black;
+  background-color: ${props => props.theme.orangeColor};
   position: absolute;
   justify-content: center;
   align-items: center;
   top: -20px;
   padding: 5px;
   border-radius: 10px;
-  box-shadow: red 0px 0px 20px;
 `;
 
 const HeaderTitle = styled.Text`
   font-size: 20px;
   font-weight: 900;
   color: white;
-  box-shadow: red 0px 0px 20px;
+  padding: 3px;
 `;
 
 const ScrollView = styled.ScrollView`
@@ -89,7 +95,10 @@ export default ({ navigation }) => {
       const focusFunc = navigation.addListener("didFocus", () => {
         trigger();
       });
-      return () => focusFunc.remove();
+      return () => {
+        focusFunc.remove();
+        return;
+      };
     }
   }, [newData]);
 
@@ -98,62 +107,70 @@ export default ({ navigation }) => {
   }, []);
 
   return (
-    <Container colors={["black", "black"]}>
-      <StatusBar barStyle="light-content" />
-      <Column>
-        <Header>
-          <HeaderTitle>수험 소식</HeaderTitle>
-        </Header>
-        <ScrollView
-          refreshControl={
-            <RefreshControl onRefresh={onRefresh} refreshing={false} />
-          }
-        >
-          <NoticeList>
-            {newData && newData.ctaNotice && newData.ctaNotice.length !== 0 ? (
-              newData.ctaNotice.reverse().map(notice => {
-                return (
-                  <Notice
-                    key={notice.id}
-                    title={notice.title}
-                    content={notice.content}
-                    url={notice.url}
-                  />
-                );
-              })
-            ) : (
-              <ActivityIndicator size="large" color={styles.blackColor} />
-            )}
-          </NoticeList>
-        </ScrollView>
-      </Column>
-      <Column>
-        <Header>
-          <HeaderTitle>학습 정보</HeaderTitle>
-        </Header>
-        <ScrollView
-          refreshControl={
-            <RefreshControl onRefresh={onRefresh} refreshing={false} />
-          }
-        >
-          <NoticeList>
-            {newData && newData.eduNotice && newData.eduNotice.length !== 0 ? (
-              newData.eduNotice.reverse().map(notice => {
-                return (
-                  <Notice
-                    key={notice.id}
-                    title={notice.title}
-                    content={notice.content}
-                    url={notice.url}
-                  />
-                );
-              })
-            ) : (
-              <ActivityIndicator size="large" color={styles.blackColor} />
-            )}
-          </NoticeList>
-        </ScrollView>
-      </Column>
+    <Container>
+      <StatusBar barStyle={"black-content"} />
+      <Wrapper>
+        <Column>
+          <Header>
+            <HeaderTitle>수험 소식</HeaderTitle>
+          </Header>
+          <ScrollView
+            refreshControl={
+              <RefreshControl onRefresh={onRefresh} refreshing={false} />
+            }
+          >
+            <NoticeList>
+              {newData &&
+              newData.ctaNotice &&
+              newData.ctaNotice.length !== 0 ? (
+                newData.ctaNotice.reverse().map(notice => {
+                  return (
+                    <Notice
+                      key={notice.id}
+                      title={notice.title}
+                      content={notice.content}
+                      url={notice.url}
+                    />
+                  );
+                })
+              ) : (
+                <ActivityIndicator size="large" color={styles.blackColor} />
+              )}
+            </NoticeList>
+          </ScrollView>
+        </Column>
+      </Wrapper>
+      <Wrapper>
+        <Column>
+          <Header>
+            <HeaderTitle>학습 정보</HeaderTitle>
+          </Header>
+          <ScrollView
+            refreshControl={
+              <RefreshControl onRefresh={onRefresh} refreshing={false} />
+            }
+          >
+            <NoticeList>
+              {newData &&
+              newData.eduNotice &&
+              newData.eduNotice.length !== 0 ? (
+                newData.eduNotice.reverse().map(notice => {
+                  return (
+                    <Notice
+                      key={notice.id}
+                      title={notice.title}
+                      content={notice.content}
+                      url={notice.url}
+                    />
+                  );
+                })
+              ) : (
+                <ActivityIndicator size="large" color={styles.blackColor} />
+              )}
+            </NoticeList>
+          </ScrollView>
+        </Column>
+      </Wrapper>
       <IOSAd />
     </Container>
   );

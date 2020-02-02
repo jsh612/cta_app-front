@@ -9,23 +9,26 @@ import { Table, Row, Cols } from "react-native-table-component";
 import Picker from "../../components/Picker";
 import constants from "../../constants";
 import ScoreButton from "../../components/ScoreButton";
-import styles from "../../styles";
 import { SEE_ROUND } from "../../queries/ScoreQueries";
 import { basicInfo, makeRankList, sortFunc, average } from "../../utils";
 import MyRank from "../../components/MyRank";
 import BackIcon from "../../components/BackIcon";
+import styles from "../../styles";
+import IOSAd from "../../components/Ad";
 
 const Container = styled.View`
+  flex: 1;
   align-items: center;
-  margin-top: 100px;
+  padding-top: 100px;
   position: relative;
+  background-color: black;
 `;
 
 const BackBtn = styled.TouchableOpacity`
   align-self: flex-start;
   position: absolute;
-  top: -75px;
-  margin-left: 10px;
+  top: 25px;
+  margin-left: 13px;
 `;
 
 const Header = styled.View`
@@ -33,6 +36,10 @@ const Header = styled.View`
   justify-content: center;
   align-items: center;
   position: absolute;
+  background-color: white;
+  width: ${constants.width}px;
+  padding-top: 100px;
+  border-radius: 40px;
   /* margin: 10px 0px; */
 `;
 
@@ -49,20 +56,15 @@ const HeaderColumn = styled.View`
 const ScrollView = styled.ScrollView`
   width: ${constants.width}px;
   margin-top: 200px;
-  background-color: green;
+  background-color: black;
+  border-radius: 10px;
 `;
 
 const TableWrapper = styled.View`
   flex: 1;
   padding: 16px;
   background-color: #fff;
-`;
-
-const Title = styled.Text`
-  font-weight: 700;
-  font-size: 20px;
-  text-align: center;
-  color: ${styles.blackColor};
+  border-radius: 10px;
 `;
 
 export default ({ navigation }) => {
@@ -184,48 +186,43 @@ export default ({ navigation }) => {
 
   return (
     <Container>
-      <StatusBar barStyle="dark-content" />
-      <BackBtn onPress={() => navigation.goBack()}>
-        <BackIcon
-          size={40}
-          name={Platform.OS === "ios" ? "ios-arrow-back" : "md--arrow-back"}
-        />
-      </BackBtn>
       <Header>
+        <BackBtn onPress={() => navigation.goBack()}>
+          <BackIcon
+            size={40}
+            name={Platform.OS === "ios" ? "ios-arrow-back" : "md--arrow-back"}
+          />
+        </BackBtn>
         <HeaderColumn>
-          <Title>연도</Title>
           <Picker
             placeholder="연도"
             items={yearArr}
             value={year}
             onValueChange={pickerHandler(setYear)}
-            size={["100px", "40px"]}
+            size={["150px", "40px"]}
           />
-          <Title>학원</Title>
           <Picker
             placeholder="학원 선택"
             items={academyArr}
             value={academy}
             onValueChange={pickerHandler(setAcademy)}
-            size={["100px", "40px"]}
+            size={["150px", "40px"]}
           />
         </HeaderColumn>
         <HeaderColumn>
-          <Title>순환</Title>
           <Picker
             placeholder="순환 선택"
             items={roundArr}
             value={round}
             onValueChange={pickerHandler(setRound)}
-            size={["100px", "40px"]}
+            size={["150px", "40px"]}
           />
-          <Title>회차</Title>
           <Picker
             placeholder="회차 선택"
             items={episodeArr}
             value={episode}
             onValueChange={pickerHandler(setEpisode)}
-            size={["100px", "40px"]}
+            size={["150px", "40px"]}
           />
         </HeaderColumn>
         <ScoreButton
@@ -278,6 +275,7 @@ export default ({ navigation }) => {
           </TableWrapper>
         ) : null}
       </ScrollView>
+      <IOSAd />
     </Container>
   );
 };

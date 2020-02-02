@@ -3,18 +3,16 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import constants from "../constants";
 import { ActivityIndicator } from "react-native";
-import styles from "../styles";
 
 const Touchable = styled.TouchableOpacity`
   margin: 10px 5px;
+  background-color: ${props => props.theme.orangeColor};
+  width: ${constants.width / 2}px;
+  border-radius: 7px;
+  padding: 10px;
 `;
 
-const Container = styled.View`
-  background-color: ${styles.blackColor};
-  padding: 10px;
-  border-radius: 4px;
-  width: ${constants.width / 2}px;
-`;
+const Container = styled.View``;
 
 const Text = styled.Text`
   color: white;

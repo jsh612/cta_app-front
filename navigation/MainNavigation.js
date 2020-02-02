@@ -18,7 +18,7 @@ const mainTab = createBottomTabNavigator(
           <NavIcon
             name={Platform.OS === "ios" ? "ios-home" : "md-home"}
             focused={focused}
-            color={"blue"}
+            color={styles.greenColor}
           />
         )
       }
@@ -30,12 +30,11 @@ const mainTab = createBottomTabNavigator(
         headerShown: false
       }),
       navigationOptions: {
-        cardStyle: { backgroundColor: "red" },
         tabBarIcon: ({ focused }) => (
           <NavIcon
-            name={Platform.OS === "ios" ? "ios-apps" : "md-apps"}
+            name={Platform.OS === "ios" ? "ios-filing" : "md-filing"}
             focused={focused}
-            color={"blue"}
+            color={styles.greenColor}
           />
         )
       }
@@ -47,7 +46,7 @@ const mainTab = createBottomTabNavigator(
           <NavIcon
             name={Platform.OS === "ios" ? "ios-person" : "md-person"}
             focused={focused}
-            color={"blue"}
+            color={styles.blueColor}
           />
         )
       }

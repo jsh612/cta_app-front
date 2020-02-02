@@ -9,10 +9,12 @@ const Wrapper = styled.View`
   align-items: center;
   width: ${props => props.size[0]};
   height: ${props => props.size[1]};
+  /* box-shadow: white 0px 0px 3px; */
 `;
 
 const Icon = styled(Ionicons)`
-  margin: 8px 5px;
+  margin: 8px 8px;
+  color: black;
 `;
 
 const Picker = ({
@@ -24,7 +26,10 @@ const Picker = ({
 }) => (
   <Wrapper size={size}>
     <RNPickerSelect
-      style={{ ...pickerSelectStyles, width: 100 }}
+      style={{
+        ...pickerSelectStyles,
+        width: 100
+      }}
       placeholder={{ label: placeholder }}
       onValueChange={onValueChange}
       items={items}
@@ -47,24 +52,30 @@ const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
     height: 40,
-    borderWidth: 1,
-    borderColor: "gray",
+    borderWidth: 2,
+    backgroundColor: "white",
+    borderColor: "white",
+    borderBottomColor: "black",
     borderRadius: 4,
     color: "black",
     padding: 5,
-    paddingLeft: 10,
-    display: "flex"
+    paddingLeft: 20,
+    display: "flex",
+    fontWeight: "900"
   },
   inputAndroid: {
     fontSize: 16,
     height: 40,
-    borderWidth: 1,
-    borderColor: "gray",
+    borderWidth: 2,
+    backgroundColor: "white",
+    borderColor: "white",
+    borderBottomColor: "black",
     borderRadius: 4,
     color: "black",
     padding: 5,
-    paddingLeft: 10,
-    display: "flex"
+    paddingLeft: 20,
+    display: "flex",
+    fontWeight: "900"
   }
 });
 
