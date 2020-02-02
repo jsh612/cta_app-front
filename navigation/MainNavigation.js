@@ -11,28 +11,14 @@ import { mainStackFactory } from "./stackMaker";
 
 const mainTab = createBottomTabNavigator(
   {
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        tabBarIcon: ({ focused }) => (
-          <NavIcon
-            size={40}
-            name={Platform.OS === "ios" ? "ios-person" : "md-person"}
-            focused={focused}
-            color={styles.blackColor}
-          />
-        )
-      }
-    },
     Home: {
       screen: Home,
       navigationOptions: {
         tabBarIcon: ({ focused }) => (
           <NavIcon
-            size={40}
             name={Platform.OS === "ios" ? "ios-home" : "md-home"}
             focused={focused}
-            color={styles.blackColor}
+            color={"blue"}
           />
         )
       }
@@ -44,38 +30,41 @@ const mainTab = createBottomTabNavigator(
         headerShown: false
       }),
       navigationOptions: {
+        cardStyle: { backgroundColor: "red" },
         tabBarIcon: ({ focused }) => (
           <NavIcon
-            size={40}
-            name={Platform.OS === "ios" ? "ios-create" : "md-create"}
+            name={Platform.OS === "ios" ? "ios-apps" : "md-apps"}
             focused={focused}
-            color={styles.blackColor}
+            color={"blue"}
+          />
+        )
+      }
+    },
+    Profile: {
+      screen: Profile,
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <NavIcon
+            name={Platform.OS === "ios" ? "ios-person" : "md-person"}
+            focused={focused}
+            color={"blue"}
           />
         )
       }
     }
-    // Profile: {
-    //   screen: Profile,
-    //   navigationOptions: {
-    //     tabBarIcon: ({ focused }) => (
-    //       <NavIcon
-    //         size={40}
-    //         name={Platform.OS === "ios" ? "ios-person" : "md-person"}
-    //         focused={focused}
-    //         color={styles.blackColor}
-    //       />
-    //     )
-    //   }
-    // }
   },
   {
     tabBarOptions: {
       showLabel: false,
       style: {
-        backgroundColor: "green",
+        backgroundColor: "black",
+        borderTopColor: "black",
         padding: 5,
         height: 60
       }
+    },
+    defaultNavigationOptions: {
+      backgroundColor: "red"
     }
   }
 );

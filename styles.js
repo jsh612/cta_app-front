@@ -1,5 +1,5 @@
 export default {
-  blackColor: "#262626",
+  blackColor: "black",
   greyColor: "#FAFAFA",
   darkGreyColor: "#999",
   lightGreyColor: "rgb(230, 230, 230)",

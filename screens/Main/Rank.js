@@ -13,7 +13,7 @@ import styles from "../../styles";
 import { SEE_ROUND } from "../../queries/ScoreQueries";
 import { basicInfo, makeRankList, sortFunc, average } from "../../utils";
 import MyRank from "../../components/MyRank";
-import NavIcon from "../../components/NavIcon";
+import BackIcon from "../../components/BackIcon";
 
 const Container = styled.View`
   align-items: center;
@@ -186,7 +186,7 @@ export default ({ navigation }) => {
     <Container>
       <StatusBar barStyle="dark-content" />
       <BackBtn onPress={() => navigation.goBack()}>
-        <NavIcon
+        <BackIcon
           size={40}
           name={Platform.OS === "ios" ? "ios-arrow-back" : "md--arrow-back"}
         />
