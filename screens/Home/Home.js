@@ -46,6 +46,7 @@ const Header = styled.View`
   top: -20px;
   padding: 5px;
   border-radius: 10px;
+  z-index: 10;
 `;
 
 const HeaderTitle = styled.Text`

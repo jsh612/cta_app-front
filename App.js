@@ -4,7 +4,7 @@ import * as Font from "expo-font";
 import { Asset } from "expo-asset";
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { persistCache } from "apollo-cache-persist";
-import { AsyncStorage, View, Text } from "react-native";
+import { AsyncStorage } from "react-native";
 import { ApolloProvider } from "@apollo/react-hooks";
 
 import apolloClientOptions from "./apollo";
@@ -13,7 +13,6 @@ import { ThemeProvider } from "styled-components";
 import styles from "./styles";
 import { AuthProvider } from "./AuthContext";
 import NavController from "./components/NavController";
-import Loader from "./components/Loader";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false); // 로딩 상태 확인 state
@@ -73,6 +72,6 @@ export default function App() {
       </ThemeProvider>
     </ApolloProvider>
   ) : (
-    <Loader />
+    <AppLoading />
   );
 }

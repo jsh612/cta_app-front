@@ -20,7 +20,7 @@ const View = styled.KeyboardAvoidingView`
 
 const LogoImg = styled.Image`
   height: ${constants.height / 5}px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 `;
 
 export default ({ navigation }) => {
