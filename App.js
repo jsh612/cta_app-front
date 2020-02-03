@@ -13,6 +13,7 @@ import { ThemeProvider } from "styled-components";
 import styles from "./styles";
 import { AuthProvider } from "./AuthContext";
 import NavController from "./components/NavController";
+import Loader from "./components/Loader";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false); // 로딩 상태 확인 state
@@ -26,7 +27,10 @@ export default function App() {
         ...Ionicons.font
       });
       //asset preload
-      await Asset.loadAsync([require("./assets/logo.png")]);
+      await Asset.loadAsync([
+        require("./assets/logo.png"),
+        require("./assets/bigLogo.png")
+      ]);
 
       //cache 생성
       const cache = new InMemoryCache();
@@ -69,6 +73,6 @@ export default function App() {
       </ThemeProvider>
     </ApolloProvider>
   ) : (
-    <AppLoading />
+    <Loader />
   );
 }

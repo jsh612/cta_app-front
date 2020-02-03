@@ -8,6 +8,7 @@ import { useLazyQuery } from "@apollo/react-hooks";
 import { SEE_NOTICE } from "../../queries/NoticeQueries";
 import styles from "../../styles";
 import IOSAd from "../../components/Ad";
+import { reverser } from "../../utils";
 
 const Container = styled.View`
   flex: 1;
@@ -68,7 +69,7 @@ const NoticeList = styled.View`
 export default ({ navigation }) => {
   const [newData, setNewData] = useState(null);
 
-  const [trigger, { data, loading, refetch }] = useLazyQuery(SEE_NOTICE, {
+  const [trigger, { data }] = useLazyQuery(SEE_NOTICE, {
     variables: {
       name: `${new Date().getFullYear()}`
     },
@@ -123,7 +124,7 @@ export default ({ navigation }) => {
               {newData &&
               newData.ctaNotice &&
               newData.ctaNotice.length !== 0 ? (
-                newData.ctaNotice.reverse().map(notice => {
+                reverser(newData.ctaNotice).map(notice => {
                   return (
                     <Notice
                       key={notice.id}
@@ -154,7 +155,7 @@ export default ({ navigation }) => {
               {newData &&
               newData.eduNotice &&
               newData.eduNotice.length !== 0 ? (
-                newData.eduNotice.reverse().map(notice => {
+                reverser(newData.eduNotice).map(notice => {
                   return (
                     <Notice
                       key={notice.id}

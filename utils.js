@@ -173,3 +173,12 @@ export const episodeSort = (arr1, arr2, arr3) => {
   arr3.sort((a, b) => a.episode - b.episode);
   return null;
 };
+
+export const reverser = arr => {
+  //revese 메소드를 사용할 경우 이유는 모르겠으나, re-render시 마다 순서가 꼬임.
+  const reverseArr = [];
+  for (let i = arr.length - 1; i >= 0; i--) {
+    reverseArr.push(arr[i]);
+  }
+  return reverseArr;
+};

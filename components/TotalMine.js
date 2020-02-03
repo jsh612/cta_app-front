@@ -146,7 +146,7 @@ const TotalMine = ({ round, academy, year, title }) => {
       {loading ? <ActivityIndicator color={"white"} /> : <Title>{title}</Title>}
       <Modal
         isVisible={modalVisible}
-        backdropOpacity={0.7}
+        backdropOpacity={0.8}
         onBackdropPress={() => setModalVisible(false)}
         animationIn={"slideInLeft"}
         animationOut={"slideOutRight"}

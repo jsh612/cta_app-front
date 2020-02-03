@@ -65,7 +65,7 @@ const Notice = ({ title, content, url }) => {
       <Title>{title}</Title>
       <Modal
         isVisible={modalVisible}
-        backdropOpacity={0.9}
+        backdropOpacity={0.8}
         onBackdropPress={() => setModalVisible(false)}
         animationIn={"slideInLeft"}
         animationOut={"slideOutRight"}
