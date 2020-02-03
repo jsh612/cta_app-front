@@ -14,6 +14,7 @@ const TextInput = styled.TextInput`
   padding-left: 10px;
   background-color: ${props => props.theme.blackColor};
   font-size: 17px;
+  font-weight: 900;
   color: white;
   border: 0px white solid;
 `;
@@ -31,7 +32,7 @@ const ScoreInput = ({
   <Container>
     <TextInput
       style={{ borderBottomWidth: 2 }}
-      placeholderTextColor={white}
+      placeholderTextColor={"grey"}
       placeholder={placeholder}
       value={value}
       autoCapitalize={autoCapitalize}

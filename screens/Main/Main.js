@@ -31,10 +31,12 @@ const Container = styled.KeyboardAvoidingView`
 const MenuWrapper = styled.View`
   background-color: white;
   width: ${constants.width}px;
-  flex: 9;
+  flex: 10;
   justify-content: center;
   align-items: center;
+  margin-top: -40px;
   border-radius: 40px;
+  padding-top: 40px;
 `;
 
 const ContentWrapper = styled.View`
@@ -57,7 +59,7 @@ const Column = styled.View`
 `;
 
 const Title = styled.Text`
-  font-weight: 700;
+  font-weight: 900;
   font-size: 17px;
   text-align: center;
   color: white;
@@ -162,14 +164,14 @@ export default ({ navigation }) => {
                   items={yearArr}
                   value={year}
                   onValueChange={pickerHandler(setYear)}
-                  size={["150px", "40px"]}
+                  size={["140px", "40px"]}
                 />
                 <Picker
                   placeholder="학원 선택"
                   items={academyArr}
                   value={academy}
                   onValueChange={pickerHandler(setAcademy)}
-                  size={["150px", "40px"]}
+                  size={["140px", "40px"]}
                 />
               </ContentWrapper>
               <ContentWrapper>
@@ -178,14 +180,14 @@ export default ({ navigation }) => {
                   items={roundArr}
                   value={round}
                   onValueChange={pickerHandler(setRound)}
-                  size={["150px", "40px"]}
+                  size={["140px", "40px"]}
                 />
                 <Picker
                   placeholder="회차 선택"
                   items={episodeArr}
                   value={episode}
                   onValueChange={pickerHandler(setEpisode)}
-                  size={["150px", "40px"]}
+                  size={["140px", "40px"]}
                 />
               </ContentWrapper>
             </Column>
@@ -212,8 +214,8 @@ export default ({ navigation }) => {
             />
             <ScroeButton text="순위 확인" onPress={goRank} />
           </BtnWrapper>
+          <IOSAd />
         </Container>
-        <IOSAd />
       </>
     </TouchableWithoutFeedback>
   );

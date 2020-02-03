@@ -27,7 +27,7 @@ const Container = styled.View`
 const BackBtn = styled.TouchableOpacity`
   align-self: flex-start;
   position: absolute;
-  top: 25px;
+  top: 65px;
   margin-left: 13px;
 `;
 
@@ -38,7 +38,9 @@ const Header = styled.View`
   position: absolute;
   background-color: white;
   width: ${constants.width}px;
-  padding-top: 100px;
+  margin-top: -40px;
+  padding-top: 110px;
+  padding-bottom: 10px;
   border-radius: 40px;
   /* margin: 10px 0px; */
 `;
@@ -198,14 +200,14 @@ export default ({ navigation }) => {
             items={yearArr}
             value={year}
             onValueChange={pickerHandler(setYear)}
-            size={["150px", "40px"]}
+            size={["140px", "40px"]}
           />
           <Picker
             placeholder="학원 선택"
             items={academyArr}
             value={academy}
             onValueChange={pickerHandler(setAcademy)}
-            size={["150px", "40px"]}
+            size={["140px", "40px"]}
           />
         </HeaderColumn>
         <HeaderColumn>
@@ -214,14 +216,14 @@ export default ({ navigation }) => {
             items={roundArr}
             value={round}
             onValueChange={pickerHandler(setRound)}
-            size={["150px", "40px"]}
+            size={["140px", "40px"]}
           />
           <Picker
             placeholder="회차 선택"
             items={episodeArr}
             value={episode}
             onValueChange={pickerHandler(setEpisode)}
-            size={["150px", "40px"]}
+            size={["140px", "40px"]}
           />
         </HeaderColumn>
         <ScoreButton
@@ -243,12 +245,12 @@ export default ({ navigation }) => {
             >
               <Row
                 data={tableInfo.tableHead}
-                style={{ height: 40, backgroundColor: styles.lightGreyColor }}
+                style={{ height: 40, backgroundColor: styles.greenColor }}
                 textStyle={{ margin: 6, textAlign: "center", fontSize: 18 }}
               />
               <Row
                 data={tableInfo.tableSubHead}
-                style={{ height: 40, backgroundColor: styles.lightGreyColor }}
+                style={{ height: 40, backgroundColor: styles.greenColor }}
                 textStyle={{ margin: 6, textAlign: "center", fontSize: 18 }}
               />
               <Row
@@ -262,7 +264,7 @@ export default ({ navigation }) => {
                 round={info.round}
                 episode={info.episode}
                 year={info.year}
-                style={{ height: 40, backgroundColor: styles.lightGreyColor }}
+                style={{ backgroundColor: styles.lightGreyColor }}
                 textStyle={{ margin: 6, textAlign: "center", fontSize: 18 }}
                 skipBool={skipBool}
               />

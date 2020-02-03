@@ -38,8 +38,10 @@ const ColumnWrapper = styled.View`
 const WhiteWrapper = styled(ColumnWrapper)`
   background-color: white;
   width: ${constants.width}px;
-  flex: 9;
+  padding-top: 40px;
+  flex: 10;
   border-radius: 40px;
+  margin-top: -40px;
 `;
 
 const Column = styled.View`

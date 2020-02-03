@@ -53,11 +53,11 @@ export default ({
 
   const dataArr = !loading
     ? [
-        `(나)${accResult.rank}`,
+        `(나)\n${accResult.rank}`,
         accResult.score,
-        `(나)${taxAccResult.rank}`,
+        `(나)\n${taxAccResult.rank}`,
         taxAccResult.score,
-        `(나)${totalAccResult.rank}`,
+        `(나)\n${totalAccResult.rank}`,
         totalAccResult.score
       ]
     : null;

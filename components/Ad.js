@@ -9,8 +9,8 @@ const IOSAd = () => {
 
   return (
     <AdMobBanner
-      // adUnitID="ca-app-pub-1397214494138395/1262883469"
-      adUnitID="ca-app-pub-3940256099942544/2934735716" //테스트
+      adUnitID="ca-app-pub-1397214494138395/1262883469"
+      // adUnitID="ca-app-pub-3940256099942544/2934735716" //테스트
       servePersonalizedAds
       onDidFailToReceiveAdWithError={bannerError}
     />
