@@ -46,7 +46,7 @@ const mainTab = createBottomTabNavigator(
           <NavIcon
             name={Platform.OS === "ios" ? "ios-person" : "md-person"}
             focused={focused}
-            color={styles.blueColor}
+            color={styles.greenColor}
           />
         )
       }
@@ -61,9 +61,6 @@ const mainTab = createBottomTabNavigator(
         padding: 5,
         height: 60
       }
-    },
-    defaultNavigationOptions: {
-      backgroundColor: "red"
     }
   }
 );

@@ -12,15 +12,17 @@ import styles from "../styles";
 const Touchable = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
-  background: ${styles.greenColor};
+  /* background: ${styles.greenColor}; */
+  background: #FDFFFC;
   border-radius: 10px;
   width: ${constants.width / 1.4}px;
   margin: 10px 0px;
   padding: 6px 5px;
+  box-shadow: ${styles.greenColor} 3px 3px 5px;
 `;
 
 const Title = styled.Text`
-  color: white;
+  color: black;
   font-weight: 900;
   font-size: 17px;
 `;

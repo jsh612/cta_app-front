@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { Text, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
+import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import styled from "styled-components";
 import useInput from "../../hooks/useInput";
 import AuthInput from "../../components/AuthInput";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_ACCOUNT } from "../../queries/AuthQueries";
 import AuthButton from "../../components/AuthButton";
+import styles from "../../styles";
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin-bottom: 120px;
+  /* margin-bottom: 120px; */
+  background: ${styles.blackColor};
 `;
 
 export default ({ navigation }) => {
@@ -32,7 +34,7 @@ export default ({ navigation }) => {
     const { value: pw } = pwInput;
 
     if (!username || !pw) {
-      Alert.alert("아이디와 비밀번호를 모두 입력해 주세요");
+      return Alert.alert("아이디와 비밀번호를 모두 입력해 주세요");
     }
     try {
       setLoading(true);

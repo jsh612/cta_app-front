@@ -8,11 +8,14 @@ const Container = styled.View`
 `;
 
 const TextInput = styled.TextInput`
-  width: ${constants.width / 1.7};
+  width: ${constants.width / 1.7}px;
   padding: 10px;
-  background-color: ${props => props.theme.greyColor};
   border-radius: 4px;
-  border: 1px solid ${props => props.theme.darkGreyColor};
+  background-color: ${props => props.theme.blackColor};
+  border: 0px white solid;
+  color: white;
+  font-size: 17px;
+  font-weight: 900;
 `;
 
 const AuthInput = ({
@@ -28,6 +31,8 @@ const AuthInput = ({
 }) => (
   <Container>
     <TextInput
+      style={{ borderBottomWidth: 2 }}
+      placeholderTextColor={"white"}
       placeholder={placeholder}
       value={value}
       autoCapitalize={autoCapitalize}

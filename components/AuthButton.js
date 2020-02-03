@@ -15,7 +15,7 @@ const Container = styled.View`
   padding: 10px;
   margin: 0px 50px;
   border-radius: 4px;
-  width: ${constants.width / 1.7};
+  width: ${constants.width / 1.7}px;
 `;
 
 const Text = styled.Text`
@@ -29,7 +29,7 @@ const AuthButton = ({
   text,
   onPress,
   loading = false,
-  bgColor = styles.blackColor
+  bgColor = styles.orangeColor
 }) => (
   //# disabled
   //  - 로딩중일 경우 컴포넌트와의 상호작용 기능을 끊기 위해

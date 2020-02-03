@@ -26,7 +26,7 @@ export default function App() {
         ...Ionicons.font
       });
       //asset preload
-      await Asset.loadAsync([require("./assets/mainLogo.png")]);
+      await Asset.loadAsync([require("./assets/logo.png")]);
 
       //cache 생성
       const cache = new InMemoryCache();

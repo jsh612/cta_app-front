@@ -30,7 +30,9 @@ export const basicInfo = () => {
   const yearArr = [
     { label: "2020", key: "2020", value: 2020 },
     { label: "2021", key: "2021", value: 2021 },
-    { label: "2022", key: "2022", value: 2022 }
+    { label: "2022", key: "2022", value: 2022 },
+    { label: "2023", key: "2023", value: 2023 },
+    { label: "2024", key: "2024", value: 2024 }
   ];
   return { roundArr, episodeArr, academyArr, yearArr };
 };

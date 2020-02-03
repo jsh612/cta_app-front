@@ -9,17 +9,18 @@ import { useMutation } from "@apollo/react-hooks";
 import AuthButton from "../../components/AuthButton";
 import { LOGIN } from "../../queries/AuthQueries";
 import { useLogIn } from "../../AuthContext";
+import styles from "../../styles";
 
 const View = styled.KeyboardAvoidingView`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background: ${styles.blackColor};
 `;
 
 const LogoImg = styled.Image`
-  width: ${constants.width / 2.5};
-  height: ${constants.height / 10};
-  margin-bottom: 70px;
+  height: ${constants.height / 5}px;
+  margin-bottom: 100px;
 `;
 
 export default ({ navigation }) => {
@@ -60,7 +61,7 @@ export default ({ navigation }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View behavior="padding" enabled>
         <LogoImg
-          source={require("../../assets/mainLogo.png")}
+          source={require("../../assets/logo.png")}
           resizeMode="contain"
         />
         <AuthInput {...idInput} placeholder="ID" />

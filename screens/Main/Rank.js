@@ -160,7 +160,6 @@ export default ({ navigation }) => {
         } else {
           seeRoundExecute();
         }
-        console.log("new::::", newData);
         setSkipBool(false);
       } else {
         Alert.alert("모든사항을 체크해 주세요");

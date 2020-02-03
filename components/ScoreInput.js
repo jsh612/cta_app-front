@@ -31,7 +31,7 @@ const ScoreInput = ({
   <Container>
     <TextInput
       style={{ borderBottomWidth: 2 }}
-      placeholderTextColor={styles.darkGreyColor}
+      placeholderTextColor={white}
       placeholder={placeholder}
       value={value}
       autoCapitalize={autoCapitalize}
