@@ -8,7 +8,7 @@
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.jpg",
+    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/bigLogo.png",
       "resizeMode": "contain",
@@ -19,7 +19,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.jsh.평균60",
+      "bundleIdentifier": "com.jsh.average60",
       "supportsTablet": true,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-1397214494138395~1482375319"

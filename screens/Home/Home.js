@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { RefreshControl, ActivityIndicator, StatusBar } from "react-native";
+import { ActivityIndicator, StatusBar } from "react-native";
 import constants from "../../constants";
 import Notice from "../../components/Notice";
 import { useLazyQuery } from "@apollo/react-hooks";
@@ -83,14 +83,6 @@ export default ({ navigation }) => {
     }
   });
 
-  const onRefresh = () => {
-    try {
-      trigger();
-    } catch (error) {
-      console.log("순위 새로고침 오류:", error);
-    }
-  };
-
   useEffect(() => {
     //navigation.addListener을 이용해여 탭 선택 되었을 시 공지를 fetch하도록 한다.
     if (data && newData) {
@@ -116,11 +108,7 @@ export default ({ navigation }) => {
           <Header>
             <HeaderTitle>수험 소식</HeaderTitle>
           </Header>
-          <ScrollView
-            refreshControl={
-              <RefreshControl onRefresh={onRefresh} refreshing={false} />
-            }
-          >
+          <ScrollView>
             <NoticeList>
               {newData &&
               newData.ctaNotice &&
@@ -147,11 +135,7 @@ export default ({ navigation }) => {
           <Header>
             <HeaderTitle>학습 정보</HeaderTitle>
           </Header>
-          <ScrollView
-            refreshControl={
-              <RefreshControl onRefresh={onRefresh} refreshing={false} />
-            }
-          >
+          <ScrollView>
             <NoticeList>
               {newData &&
               newData.eduNotice &&
