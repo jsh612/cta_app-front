@@ -61,10 +61,10 @@ export default ({ navigation }) => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View behavior="padding" enabled>
         <LogoImg
-          source={require("../../assets/logo.png")}
+          source={require("../../assets/bigLogo.png")}
           resizeMode="contain"
         />
-        <AuthInput {...idInput} placeholder="ID" />
+        <AuthInput {...idInput} placeholder="ID" autoFocus={true} />
         <AuthInput {...pwInput} placeholder="비밀번호" password={true} />
         <AuthButton loading={loading} text={"로그인"} onPress={handledLogin} />
         <AuthButton

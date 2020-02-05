@@ -55,7 +55,7 @@ export default ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
-        <AuthInput {...usernameInput} placeholder="ID" />
+        <AuthInput {...usernameInput} placeholder="ID" autoFocus={true} />
         <AuthInput {...pwInput} placeholder="비밀번호" password={true} />
         <AuthButton text="가입하기" onPress={handleSingup} loading={loading} />
       </Container>

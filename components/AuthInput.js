@@ -27,7 +27,8 @@ const AuthInput = ({
   returnKeyType = "done", // returnKeyType --> 폰 키보드에서 return의 타입
   onSubmitEditing = () => null, // 작성이 완료 되어서 제출시 이벤트
   autoCorrect = false,
-  password = false
+  password = false,
+  autoFocus = false
 }) => (
   <Container>
     <TextInput
@@ -42,6 +43,8 @@ const AuthInput = ({
       onSubmitEditing={onSubmitEditing}
       autoCorrect={autoCorrect}
       secureTextEntry={password}
+      selectionColor={"white"}
+      autoFocus={autoFocus}
     />
   </Container>
 );
