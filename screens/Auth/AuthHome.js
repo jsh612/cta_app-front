@@ -25,9 +25,7 @@ const LogoImg = styled.Image`
 
 export default ({ navigation }) => {
   const pwInput = useInput("");
-  console.log("1::::", navigation.getParam("username", ""));
   const idInput = useInput(navigation.getParam("username", ""));
-  console.log("input:::", idInput.value);
 
   const logIn = useLogIn();
 
