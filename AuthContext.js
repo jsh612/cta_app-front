@@ -57,7 +57,7 @@ export const AuthProvider = ({ isLoggedIn: isLoggedInProp, children }) => {
       console.log("Auth meChecker 오류::", error);
     }
   };
-
+  // AsyncStorage.clear();
   return (
     <AuthContext.Provider
       value={{ isLoggedIn, logUserIn, logUserOut, meChecker }}

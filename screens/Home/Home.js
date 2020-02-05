@@ -76,10 +76,18 @@ export default ({ navigation }) => {
     },
     fetchPolicy: "network-only",
     onCompleted: data => {
-      const {
-        seeNotice: { ctaNotice, eduNotice }
-      } = data;
-      setNewData({ ctaNotice, eduNotice });
+      try {
+        const {
+          seeNotice: { ctaNotice, eduNotice }
+        } = data;
+        setNewData({ ctaNotice, eduNotice });
+      } catch (error) {
+        setNewData({});
+      }
+    },
+    onError: error => {
+      // console.log(error);
+      setNewData({});
     }
   });
 
@@ -110,19 +118,19 @@ export default ({ navigation }) => {
           </Header>
           <ScrollView>
             <NoticeList>
-              {newData &&
-              newData.ctaNotice &&
-              newData.ctaNotice.length !== 0 ? (
-                reverser(newData.ctaNotice).map(notice => {
-                  return (
-                    <Notice
-                      key={notice.id}
-                      title={notice.title}
-                      content={notice.content}
-                      url={notice.url}
-                    />
-                  );
-                })
+              {newData ? (
+                newData.ctaNotice && newData.ctaNotice.length !== 0 ? (
+                  reverser(newData.ctaNotice).map(notice => {
+                    return (
+                      <Notice
+                        key={notice.id}
+                        title={notice.title}
+                        content={notice.content}
+                        url={notice.url}
+                      />
+                    );
+                  })
+                ) : null
               ) : (
                 <ActivityIndicator size="large" color={styles.blackColor} />
               )}
@@ -137,19 +145,19 @@ export default ({ navigation }) => {
           </Header>
           <ScrollView>
             <NoticeList>
-              {newData &&
-              newData.eduNotice &&
-              newData.eduNotice.length !== 0 ? (
-                reverser(newData.eduNotice).map(notice => {
-                  return (
-                    <Notice
-                      key={notice.id}
-                      title={notice.title}
-                      content={notice.content}
-                      url={notice.url}
-                    />
-                  );
-                })
+              {newData ? (
+                newData.eduNotice && newData.eduNotice.length !== 0 ? (
+                  reverser(newData.eduNotice).map(notice => {
+                    return (
+                      <Notice
+                        key={notice.id}
+                        title={notice.title}
+                        content={notice.content}
+                        url={notice.url}
+                      />
+                    );
+                  })
+                ) : null
               ) : (
                 <ActivityIndicator size="large" color={styles.blackColor} />
               )}
