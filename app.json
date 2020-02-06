@@ -19,7 +19,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.jsh.average60",
+      "bundleIdentifier": "com.jsh612.average60",
       "supportsTablet": true,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-1397214494138395~1482375319"
