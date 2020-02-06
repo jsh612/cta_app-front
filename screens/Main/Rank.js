@@ -191,7 +191,7 @@ export default ({ navigation }) => {
         <BackBtn onPress={() => navigation.goBack()}>
           <BackIcon
             size={40}
-            name={Platform.OS === "ios" ? "ios-arrow-back" : "md--arrow-back"}
+            name={Platform.OS === "ios" ? "ios-arrow-back" : "md-arrow-back"}
           />
         </BackBtn>
         <HeaderColumn>

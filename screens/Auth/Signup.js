@@ -8,7 +8,7 @@ import { CREATE_ACCOUNT } from "../../queries/AuthQueries";
 import AuthButton from "../../components/AuthButton";
 import styles from "../../styles";
 
-const Container = styled.View`
+const Container = styled.KeyboardAvoidingView`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -54,7 +54,7 @@ export default ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <Container>
+      <Container behavior="padding" enabled>
         <AuthInput {...usernameInput} placeholder="ID" autoFocus={true} />
         <AuthInput {...pwInput} placeholder="비밀번호" password={true} />
         <AuthButton text="가입하기" onPress={handleSingup} loading={loading} />
