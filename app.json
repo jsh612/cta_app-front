@@ -24,6 +24,12 @@
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-1397214494138395~1482375319"
       }
+    },
+    "android": {
+      "package": "com.jsh612.average60",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~3347511713"
+      }
     }
   }
 }

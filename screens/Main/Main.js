@@ -154,69 +154,67 @@ export default ({ navigation }) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <>
-        <Container behavior="padding" enabled>
-          <MenuWrapper>
-            <Column>
-              <ContentWrapper>
-                <Picker
-                  placeholder="연도 선택"
-                  items={yearArr}
-                  value={year}
-                  onValueChange={pickerHandler(setYear)}
-                  size={["140px", "40px"]}
-                />
-                <Picker
-                  placeholder="학원 선택"
-                  items={academyArr}
-                  value={academy}
-                  onValueChange={pickerHandler(setAcademy)}
-                  size={["140px", "40px"]}
-                />
-              </ContentWrapper>
-              <ContentWrapper>
-                <Picker
-                  placeholder="순환 선택"
-                  items={roundArr}
-                  value={round}
-                  onValueChange={pickerHandler(setRound)}
-                  size={["140px", "40px"]}
-                />
-                <Picker
-                  placeholder="회차 선택"
-                  items={episodeArr}
-                  value={episode}
-                  onValueChange={pickerHandler(setEpisode)}
-                  size={["140px", "40px"]}
-                />
-              </ContentWrapper>
-            </Column>
-            <InputWrraper>
-              <Title>회1</Title>
-              <ScoreInput
-                {...accInput}
-                placeholder="회1 점수"
-                keyboardType="numeric"
+      <Container behavior="padding" enabled>
+        <MenuWrapper>
+          <Column>
+            <ContentWrapper>
+              <Picker
+                placeholder="연도 선택"
+                items={yearArr}
+                value={year}
+                onValueChange={pickerHandler(setYear)}
+                size={["140px", "40px"]}
               />
-              <Title>회2</Title>
-              <ScoreInput
-                {...taxAccInput}
-                placeholder="회2 점수"
-                keyboardType="numeric"
+              <Picker
+                placeholder="학원 선택"
+                items={academyArr}
+                value={academy}
+                onValueChange={pickerHandler(setAcademy)}
+                size={["140px", "40px"]}
               />
-            </InputWrraper>
-          </MenuWrapper>
-          <BtnWrapper>
-            <ScroeButton
-              text="성적 제출"
-              onPress={submitHandler}
-              loading={loading}
+            </ContentWrapper>
+            <ContentWrapper>
+              <Picker
+                placeholder="순환 선택"
+                items={roundArr}
+                value={round}
+                onValueChange={pickerHandler(setRound)}
+                size={["140px", "40px"]}
+              />
+              <Picker
+                placeholder="회차 선택"
+                items={episodeArr}
+                value={episode}
+                onValueChange={pickerHandler(setEpisode)}
+                size={["140px", "40px"]}
+              />
+            </ContentWrapper>
+          </Column>
+          <InputWrraper>
+            <Title>회1</Title>
+            <ScoreInput
+              {...accInput}
+              placeholder="회1 점수"
+              keyboardType="numeric"
             />
-            <ScroeButton text="순위 확인" onPress={goRank} />
-          </BtnWrapper>
-          <IOSAd />
-        </Container>
-      </>
+            <Title>회2</Title>
+            <ScoreInput
+              {...taxAccInput}
+              placeholder="회2 점수"
+              keyboardType="numeric"
+            />
+          </InputWrraper>
+        </MenuWrapper>
+        <BtnWrapper>
+          <ScroeButton
+            text="성적 제출"
+            onPress={submitHandler}
+            loading={loading}
+          />
+          <ScroeButton text="순위 확인" onPress={goRank} />
+        </BtnWrapper>
+        <IOSAd />
+      </Container>
     </TouchableWithoutFeedback>
   );
 };
