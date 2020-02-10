@@ -19,6 +19,9 @@ const Touchable = styled.TouchableOpacity`
   margin: 10px 0px;
   padding: 6px 5px;
   box-shadow: ${styles.greenColor} 3px 3px 5px;
+
+  /* 안드로이드용
+  border: ${styles.greenColor} 2px solid; */
 `;
 
 const Title = styled.Text`

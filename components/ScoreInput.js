@@ -41,6 +41,7 @@ const ScoreInput = ({
       returnKeyType={returnKeyType}
       onSubmitEditing={onSubmitEditing}
       autoCorrect={autoCorrect}
+      selectionColor={"white"}
     />
   </Container>
 );

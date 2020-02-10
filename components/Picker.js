@@ -10,6 +10,9 @@ const Wrapper = styled.View`
   width: ${props => props.size[0]};
   height: ${props => props.size[1]};
   /* box-shadow: white 0px 0px 3px; */
+
+  /* 아래는 안드로이드용 코드
+  border: solid 2px white; */
 `;
 
 const Icon = styled(Ionicons)`
@@ -24,7 +27,17 @@ const Picker = ({
   items,
   value
 }) => (
-  <Wrapper size={size}>
+  <Wrapper
+    size={size}
+    //아래는 안드로이드용
+    // style={{
+    //   borderStyle: "solid",
+    //   borderBottomColor: "black",
+    //   boderTopColor: "white",
+    //   borderLeftColor: "white",
+    //   borderRightColor: "white"
+    // }}
+  >
     <RNPickerSelect
       style={{
         ...pickerSelectStyles,
@@ -67,7 +80,6 @@ const pickerSelectStyles = StyleSheet.create({
     fontSize: 16,
     height: 40,
     borderWidth: 2,
-    backgroundColor: "white",
     borderColor: "white",
     borderBottomColor: "black",
     borderRadius: 4,
